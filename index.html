@@ -3,225 +3,274 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Smash Fit OS | Ultimate Dashboard</title>
+    <title>Smash Fit | Smash Your Goals</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@300;400;500;600;700&family=Roboto+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
 
     <style>
-        /* ==================== 1. MODERN DESIGN TOKENS ==================== */
+        /* ==================== 1. GYM THEME ENGINE ==================== */
         :root {
-            --bg-body: #09090b;
-            --bg-sidebar: #121214;
-            --bg-card: #18181b;
-            --bg-hover: #27272a;
+            /* Brand Identity */
+            --brand-primary: #FF3B30; /* High Energy Red */
+            --brand-dark: #8E0000;
+            --brand-accent: #1C1C1E;
             
-            --primary: #22C55E;
-            --primary-glow: rgba(34, 197, 94, 0.4);
-            --primary-dim: rgba(34, 197, 94, 0.1);
+            /* Dark Mode Core */
+            --bg-body: #050505;
+            --bg-panel: #0F0F0F;
+            --bg-card: #141414;
+            --bg-input: #000000;
             
-            --secondary: #3B82F6;
-            --danger: #EF4444;
-            --warning: #F59E0B;
+            /* Typography */
+            --font-head: 'Teko', sans-serif;
+            --font-body: 'Roboto Condensed', sans-serif;
+
+            /* Borders & Effects */
+            --border: 1px solid #333333;
+            --border-active: 1px solid #FF3B30;
+            --shadow: 0 10px 30px rgba(0,0,0,0.8);
             
-            --text-main: #FAFAFA;
-            --text-secondary: #A1A1AA;
-            --text-muted: #52525B;
-            
-            --border: 1px solid rgba(255, 255, 255, 0.08);
-            --radius: 16px;
-            --nav-w: 260px;
+            /* Dimensions */
+            --nav-width: 280px;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; outline: none; -webkit-tap-highlight-color: transparent; }
         
         body {
             background-color: var(--bg-body);
-            color: var(--text-main);
-            font-family: 'Inter', sans-serif;
+            color: #fff;
+            font-family: var(--font-body);
             height: 100vh;
             overflow: hidden;
             display: flex;
+            /* Industrial Gym Texture */
+            background-image: 
+                linear-gradient(rgba(0,0,0,0.92), rgba(0,0,0,0.92)),
+                url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
         }
 
         /* Typography */
-        h1, h2, h3 { font-weight: 700; letter-spacing: -0.02em; color: var(--text-main); }
-        .text-accent { color: var(--primary); }
-        .font-mono { font-family: 'JetBrains Mono', monospace; }
-        .text-sm { font-size: 0.875rem; color: var(--text-secondary); }
-        .text-xs { font-size: 0.75rem; color: var(--text-secondary); }
+        h1, h2, h3, h4 { font-family: var(--font-head); text-transform: uppercase; letter-spacing: 1px; font-weight: 600; margin: 0; line-height: 1.1; }
+        p { line-height: 1.5; color: #aaa; }
+        .text-brand { color: var(--brand-primary); }
+        .text-white { color: #fff; }
+        .font-num { font-family: var(--font-head); letter-spacing: 1px; }
 
-        /* UI Elements */
+        /* UI Components */
         .btn {
+            padding: 12px 24px; border: none; font-weight: 500; cursor: pointer; text-transform: uppercase;
+            font-family: var(--font-head); font-size: 1.2rem; letter-spacing: 1px; transition: 0.2s;
             display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-            padding: 10px 20px; border-radius: 10px; font-weight: 600; font-size: 0.9rem;
-            cursor: pointer; transition: 0.2s; border: 1px solid transparent;
+            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+            text-decoration: none;
         }
-        .btn:active { transform: scale(0.98); }
-        .btn-primary { background: var(--primary); color: #000; box-shadow: 0 0 20px var(--primary-dim); }
-        .btn-primary:hover { filter: brightness(1.1); box-shadow: 0 0 30px var(--primary-dim); }
-        .btn-ghost { background: rgba(255,255,255,0.05); color: var(--text-main); border: var(--border); }
-        .btn-ghost:hover { background: var(--bg-hover); }
+        .btn:active { transform: scale(0.96); }
+        
+        .btn-primary { background: var(--brand-primary); color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,0.5); }
+        .btn-primary:hover { background: #ff5f56; box-shadow: 0 0 20px rgba(255, 59, 48, 0.4); }
+        
+        .btn-ghost { background: transparent; border: 1px solid #444; color: #fff; }
+        .btn-ghost:hover { border-color: var(--brand-primary); color: var(--brand-primary); background: rgba(255,59,48,0.1); }
+        
+        .btn-danger { background: rgba(255, 69, 58, 0.1); color: var(--brand-primary); border: 1px solid var(--brand-primary); }
+        .btn-danger:hover { background: var(--brand-primary); color: #fff; }
+
         .full-width { width: 100%; }
 
-        /* Modern Cards */
+        /* Cards */
         .card {
-            background: var(--bg-card); border-radius: var(--radius); padding: 24px;
-            border: var(--border); position: relative; overflow: hidden;
+            background: var(--bg-card); border: var(--border); padding: 24px;
+            margin-bottom: 20px; position: relative; transition: 0.3s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
         }
+        .card:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(0,0,0,0.5); border-color: #555; }
+        .card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%;
+            background: #333; transition: 0.3s;
+        }
+        .card:hover::before { background: var(--brand-primary); }
         
-        /* BENTO GRID SYSTEM */
-        .bento-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            grid-template-rows: auto auto; /* Adaptive rows */
-            gap: 20px;
-            padding-bottom: 40px;
+        /* === UPGRADED MEMBERSHIP CARDS === */
+        .card-bronze { 
+            background: linear-gradient(160deg, #1e1e1e 0%, #3e2723 100%); 
+            border: 1px solid #8D6E63; 
         }
-        .span-1 { grid-column: span 1; }
-        .span-2 { grid-column: span 2; }
-        .span-3 { grid-column: span 3; }
-        .span-4 { grid-column: span 4; }
-        
-        /* Mobile Bento Adjustment */
-        @media (max-width: 1024px) {
-            .bento-grid { grid-template-columns: repeat(2, 1fr); }
-            .span-1, .span-2, .span-3 { grid-column: span 2; } /* Full width on mobile */
-            .span-4 { grid-column: span 2; }
-        }
+        .card-bronze h2 { color: #D7CCC8; }
+        .card-bronze::before { background: #D7CCC8; }
 
-        /* CSS Charts */
-        .chart-container {
-            display: flex; align-items: flex-end; justify-content: space-between;
-            height: 120px; margin-top: 20px; padding-top: 20px; border-top: 1px dashed rgba(255,255,255,0.1);
+        .card-silver { 
+            background: linear-gradient(160deg, #1e1e1e 0%, #37474F 100%); 
+            border: 1px solid #90A4AE;
         }
-        .bar {
-            width: 12%; border-radius: 4px; background: var(--bg-hover);
-            transition: height 0.5s ease; position: relative;
-        }
-        .bar:hover { background: var(--primary); }
-        .bar.active { background: var(--primary); box-shadow: 0 0 15px var(--primary-glow); }
+        .card-silver h2 { color: #CFD8DC; }
+        .card-silver::before { background: #CFD8DC; }
 
-        /* Activity Feed */
-        .activity-item {
-            display: flex; align-items: center; gap: 12px; padding: 12px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+        .card-gold { 
+            background: linear-gradient(160deg, #1e1e1e 0%, #463805 100%); 
+            border: 1px solid #FFD700;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.1);
         }
-        .activity-item:last-child { border-bottom: none; }
-        .activity-icon {
-            width: 32px; height: 32px; border-radius: 8px; background: var(--bg-hover);
-            display: grid; place-items: center; color: var(--text-secondary);
-        }
+        .card-gold h2 { color: #FFD700; }
+        .card-gold::before { background: #FFD700; }
 
         /* Inputs */
+        .input-group { margin-bottom: 20px; }
+        .input-group label { display: block; margin-bottom: 8px; color: #888; font-size: 0.8rem; text-transform: uppercase; font-weight: bold; letter-spacing: 1px; }
         input, select {
-            width: 100%; padding: 12px; background: #000; border: var(--border);
-            border-radius: 8px; color: #fff; margin-bottom: 15px; font-size: 0.95rem;
+            width: 100%; padding: 14px; background: var(--bg-input); border: 1px solid #333;
+            color: #fff; font-size: 1rem; transition: 0.2s; font-family: var(--font-body);
         }
-        input:focus { border-color: var(--primary); }
+        input:focus, select:focus { border-color: var(--brand-primary); box-shadow: 0 0 0 2px rgba(255, 59, 48, 0.2); }
 
         /* Layout */
         .app-shell { display: flex; width: 100%; height: 100%; }
+        
+        /* Sidebar */
         .sidebar {
-            width: var(--nav-width); background: var(--bg-sidebar); border-right: var(--border);
-            padding: 24px; display: flex; flex-direction: column; z-index: 50;
+            width: var(--nav-width); background: var(--bg-panel); border-right: var(--border);
+            display: flex; flex-direction: column; padding: 0; z-index: 50;
         }
-        .main-content {
-            flex: 1; padding: 30px; overflow-y: auto;
-            background: radial-gradient(circle at top right, #131316 0%, #09090b 50%);
+        .sidebar-header {
+            padding: 30px; text-align: center; border-bottom: 1px solid #222;
+            background: linear-gradient(180deg, rgba(20,20,20,1) 0%, rgba(15,15,15,1) 100%);
+            display: flex; justify-content: center; align-items: center;
         }
+        .sidebar-logo { max-width: 140px; height: auto; display: block; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); }
+        .auth-logo { max-width: 160px; height: auto; display: block; margin: 0 auto 15px auto; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.6)); }
 
-        /* Nav Items */
+        .logo-text { font-family: 'Teko'; font-size: 3rem; color: #fff; line-height: 0.8; font-weight: 700; }
+        .logo-text span { color: var(--brand-primary); }
+        
+        .nav-list { padding: 20px; flex: 1; overflow-y: auto; }
         .nav-item {
-            padding: 12px 16px; margin-bottom: 4px; border-radius: 10px; cursor: pointer;
-            color: var(--text-secondary); display: flex; align-items: center; gap: 12px;
-            font-weight: 500; transition: 0.2s;
+            padding: 14px 20px; margin-bottom: 8px; cursor: pointer; color: #888;
+            display: flex; align-items: center; gap: 15px; font-family: var(--font-head);
+            text-transform: uppercase; font-size: 1.4rem; transition: 0.2s; border-left: 3px solid transparent;
         }
-        .nav-item:hover, .nav-item.active { background: var(--bg-hover); color: var(--text-main); }
-        .nav-item.active { border-left: 3px solid var(--primary); }
+        .nav-item:hover { color: #fff; background: rgba(255,255,255,0.03); }
+        .nav-item.active { color: var(--brand-primary); border-left-color: var(--brand-primary); background: linear-gradient(90deg, rgba(255, 59, 48, 0.1), transparent); }
 
-        /* Mobile Nav */
+        .main-content { flex: 1; padding: 40px; overflow-y: auto; position: relative; scroll-behavior: smooth; }
+        
+        /* Custom Scrollbar */
+        .main-content::-webkit-scrollbar { width: 8px; }
+        .main-content::-webkit-scrollbar-track { background: #000; }
+        .main-content::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+        .main-content::-webkit-scrollbar-thumb:hover { background: var(--brand-primary); }
+
+        /* Grids & Tables */
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 20px; }
+        .list-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 1px solid #333; padding-bottom: 15px; flex-wrap: wrap; gap: 10px; }
+
+        .info-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.95rem; }
+        .info-table td, .info-table th { padding: 12px 5px; border-bottom: 1px solid rgba(255,255,255,0.1); text-align: left; }
+        .info-table th { color: var(--brand-primary); font-family: var(--font-head); font-size: 1.1rem; letter-spacing: 0.5px; }
+        .info-table tr:last-child td { border-bottom: none; }
+
+        /* Auth Screen */
+        #auth-screen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 5000;
+            background: #000; display: flex; align-items: center; justify-content: center;
+            background-image: url('https://images.unsplash.com/photo-1599058945522-28d584b6f0ff?q=80&w=2069&auto=format&fit=crop');
+            background-size: cover; background-position: center;
+        }
+        .auth-overlay { position: absolute; inset: 0; background: linear-gradient(0deg, rgba(0,0,0,0.9), rgba(0,0,0,0.6)); backdrop-filter: blur(3px); }
+        .auth-box { width: 100%; max-width: 400px; padding: 40px; background: rgba(10, 10, 10, 0.95); border: 1px solid #333; position: relative; z-index: 2; box-shadow: 0 20px 50px #000; }
+
+        /* Modals & Toast */
+        #modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9);
+            z-index: 2000; display: none; align-items: center; justify-content: center; backdrop-filter: blur(5px);
+        }
+        #modal-content { width: 90%; max-width: 500px; background: #111; border: 1px solid #333; max-height: 90vh; overflow-y: auto; }
+        
+        #toast {
+            position: fixed; bottom: 30px; right: 30px; background: #fff; color: #000;
+            padding: 15px 30px; font-weight: bold; z-index: 9999; transform: translateY(150px); transition: 0.3s;
+            border-left: 6px solid var(--brand-primary); font-family: var(--font-head); font-size: 1.4rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+
+        /* Mobile Optimization */
         .mobile-nav { display: none; }
         @media (max-width: 768px) {
             .sidebar { display: none; }
-            .mobile-nav {
-                display: flex; position: fixed; bottom: 0; left: 0; width: 100%; height: 70px;
-                background: rgba(18, 18, 20, 0.95); backdrop-filter: blur(10px);
-                border-top: var(--border); z-index: 100; justify-content: space-around; align-items: center;
-            }
-            .main-content { padding: 20px; padding-bottom: 90px; }
-            .nav-btn { background: none; border: none; color: var(--text-secondary); display: flex; flex-direction: column; align-items: center; font-size: 0.7rem; gap: 4px; }
-            .nav-btn.active { color: var(--primary); }
-        }
-
-        /* Modals & Overlay */
-        #modal-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.8); backdrop-filter: blur(4px);
-            z-index: 2000; display: none; align-items: center; justify-content: center;
-        }
-        #toast {
-            position: fixed; bottom: 30px; right: 30px; background: var(--bg-card);
-            border-left: 4px solid var(--primary); padding: 16px 24px; border-radius: 8px;
-            z-index: 9999; transform: translateY(100px); transition: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5); font-weight: 600;
+            .mobile-nav { display: flex; position: fixed; bottom: 0; left: 0; width: 100%; height: 65px; background: #0F0F0F; border-top: 1px solid #333; z-index: 100; justify-content: space-around; align-items: center; padding-bottom: env(safe-area-inset-bottom); }
+            .main-content { padding: 20px; padding-bottom: 100px; }
+            .nav-btn { background: none; border: none; color: #666; display: flex; flex-direction: column; align-items: center; font-size: 0.7rem; gap: 4px; font-family: var(--font-head); letter-spacing: 1px; }
+            .nav-btn.active { color: var(--brand-primary); transform: translateY(-2px); }
+            .nav-btn i { font-size: 1.6rem; }
+            h1 { font-size: 2rem; }
+            .grid-3, .grid-2 { grid-template-columns: 1fr; }
         }
 
         .hidden { display: none !important; }
-        .flex-between { display: flex; justify-content: space-between; align-items: center; }
-        .badge { padding: 4px 8px; border-radius: 6px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; background: var(--bg-hover); }
+        
+        /* Utility */
+        .badge { background: #333; color: #fff; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; }
+        .roster-container { margin-top: 15px; background: #080808; padding: 15px; border: 1px solid #222; }
+        .roster-item { display: flex; justify-content: space-between; border-bottom: 1px dashed #333; padding: 8px 0; color: #ccc; font-size: 0.9rem; }
     </style>
 </head>
 <body>
 
-    <div id="toast">Action Successful</div>
+    <div id="toast">ACTION SUCCESSFUL</div>
 
     <div id="modal-overlay">
-        <div id="modal-content" class="card" style="width: 90%; max-width: 480px; box-shadow: 0 20px 50px rgba(0,0,0,0.5);"></div>
+        <div id="modal-content" class="card"></div>
     </div>
 
-    <section id="auth-screen" style="position:fixed; top:0; left:0; width:100%; height:100%; z-index:5000; display:flex; align-items:center; justify-content:center;">
-        <div class="card" style="width:100%; max-width:400px; padding:40px; text-align:center;">
-            <div style="margin-bottom:40px;">
-                <div style="width:64px; height:64px; background:var(--primary); border-radius:16px; display:grid; place-items:center; margin:0 auto 20px; box-shadow:0 0 40px var(--primary-glow);">
-                    <i class="material-icons-round" style="font-size:32px; color:#000;">bolt</i>
-                </div>
-                <h2>Smash Fit <span class="text-accent">OS</span></h2>
-                <p class="text-sm">Enterprise Dashboard</p>
+    <section id="auth-screen">
+        <div class="auth-overlay"></div>
+        <div class="auth-box">
+            <div style="text-align: center; margin-bottom: 30px;">
+                <img src="https://i.postimg.cc/rshzg1Fc/4c36cbda-1c04-4ffc-a367-5ff13a88e1e2.png" alt="Smash Fit Logo" class="auth-logo">
+                
+                <div class="logo-text" style="font-size: 2.5rem;">SMASH <span>FIT</span></div>
+                <p style="color: #FF3B30; font-family: 'Teko'; font-size: 1.2rem; letter-spacing: 2px; text-transform: uppercase;">Smash Your Comfort Zone</p>
+                <p class="text-muted" style="font-size: 0.8rem; margin-top: 10px;">SARIT CENTRE • NAIROBI</p>
             </div>
-
-            <form id="login-form">
-                <input type="email" id="login-email" value="admin@smashfit.com" required>
-                <input type="password" id="login-pass" value="123" required>
-                <button type="submit" class="btn btn-primary full-width">Sign In</button>
-            </form>
             
-            <button onclick="App.factoryReset()" class="btn btn-ghost full-width" style="margin-top:20px; border:none; color:var(--danger); opacity:0.6; font-size:0.8rem;">
-                <i class="material-icons-round" style="font-size:14px;">refresh</i> Reset Database
-            </button>
+            <form id="login-form">
+                <div class="input-group">
+                    <label>Email Address</label>
+                    <input type="email" id="login-email" required placeholder="member@smashfit.com">
+                </div>
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" id="login-pass" required placeholder="123">
+                </div>
+                <button type="submit" class="btn btn-primary full-width">ENTER GYM</button>
+            </form>
+            <div style="margin-top: 20px; text-align: center;">
+                <p style="font-size: 0.8rem;">Demo: admin@smashfit.com | member@smashfit.com</p>
+            </div>
         </div>
     </section>
 
     <div id="app-shell" class="app-shell hidden">
         
         <aside class="sidebar">
-            <div style="display:flex; align-items:center; gap:12px; margin-bottom:40px; padding-left:10px;">
-                <div style="width:32px; height:32px; background:var(--primary); border-radius:8px; display:grid; place-items:center;"><i class="material-icons-round" style="font-size:20px; color:#000;">bolt</i></div>
-                <h3 style="font-size:1.1rem;">Smash Fit</h3>
+            <div class="sidebar-header">
+                <img src="https://i.postimg.cc/rshzg1Fc/4c36cbda-1c04-4ffc-a367-5ff13a88e1e2.png" alt="Smash Fit Logo" class="sidebar-logo">
             </div>
             
-            <ul id="sidebar-nav" style="list-style:none; padding:0; flex:1;"></ul>
+            <div id="sidebar-nav" class="nav-list"></div>
             
-            <div class="card" style="padding:12px; margin:0; display:flex; align-items:center; gap:12px; background:#000; border:none;">
-                <div style="width:36px; height:36px; background:linear-gradient(45deg, var(--secondary), #60A5FA); border-radius:50%; display:grid; place-items:center; font-weight:700; font-size:0.9rem;">
-                    <span id="user-initial">A</span>
+            <div style="padding: 20px; border-top: 1px solid #222;">
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <div style="width: 40px; height: 40px; background: var(--brand-primary); color: #fff; font-weight: bold; border-radius: 50%; display: grid; place-items: center; font-family: 'Teko'; font-size: 1.5rem;" id="user-initial">A</div>
+                    <div style="flex: 1; overflow: hidden;">
+                        <div id="user-name" style="font-family: 'Teko'; font-size: 1.4rem; line-height: 1;">Admin</div>
+                        <div id="user-role" style="font-size: 0.7rem; color: #888; font-weight: bold;">ADMINISTRATOR</div>
+                    </div>
+                    <button onclick="location.reload()" class="btn-ghost" style="padding: 8px; border:none;"><i class="material-icons-round">logout</i></button>
                 </div>
-                <div style="flex:1; overflow:hidden;">
-                    <div id="user-name" style="font-size:0.85rem; font-weight:600;">Admin</div>
-                    <div id="user-role" style="font-size:0.7rem; color:var(--text-secondary);">ADMIN</div>
-                </div>
-                <i class="material-icons-round" onclick="location.reload()" style="cursor:pointer; color:var(--text-muted);">logout</i>
             </div>
         </aside>
 
@@ -231,65 +280,200 @@
     </div>
 
     <script>
-        // --- 1. LOCAL DB ---
+        // --- 1. CONFIG & DATA ---
+        
+        // Smash Fit Specific Data
+        const GymData = {
+            info: {
+                name: "Smash Fit Gym",
+                slogan: "Smash Your Goals",
+                address: "Sarit Centre, 6th Floor, Karuna Road, Nairobi, Kenya",
+                phone: "+254 704 227 227",
+                email: "info@smashfitgym.com",
+                mission: "To solve fundamental fitness problems with advanced knowledge, state-of-the-art equipment, and motivating experiences.",
+            },
+            hours: [
+                { day: "Weekdays (Mon - Fri)", time: "05:00 AM – 10:00 PM" },
+                { day: "Weekends & Holidays", time: "07:00 AM – 07:00 PM" }
+            ],
+            // Updated Membership Structure for Selectors
+            membership: [
+                { 
+                    type: "Bronze", 
+                    css: "card-bronze", 
+                    plans: [
+                        { dur: "Monthly", price: 8500 },
+                        { dur: "Quarterly", price: 24500 },
+                        { dur: "Annual", price: 83000 }
+                    ]
+                },
+                { 
+                    type: "Silver", 
+                    css: "card-silver",
+                    plans: [
+                        { dur: "Monthly", price: 9600 },
+                        { dur: "Quarterly", price: 27500 },
+                        { dur: "Annual", price: 94000 }
+                    ]
+                },
+                { 
+                    type: "Gold", 
+                    css: "card-gold",
+                    plans: [
+                        { dur: "Monthly", price: 10700 },
+                        { dur: "Quarterly", price: 30500 },
+                        { dur: "Annual", price: 99000 }
+                    ]
+                }
+            ],
+            trainers: [
+                "Boniface Ninno", "Steve Boycardio", "Ebel Odel", "Frank Murule", 
+                "Sabina Shamilar", "Sammy Kabesa", "Anthony Maina", "Billy Wanga", 
+                "Vinzenzio Tietie", "Charmaine Gow", "Eric Tabu Juma"
+            ]
+        };
+
+        const Utils = {
+            formatTime12: (time24) => {
+                if (!time24) return '';
+                const [h, m] = time24.split(':');
+                const hour = parseInt(h);
+                const ampm = hour >= 12 ? 'PM' : 'AM';
+                const hour12 = hour % 12 || 12;
+                return `${hour12}:${m} ${ampm}`;
+            },
+            formatMoney: (amount) => {
+                return "KES " + parseInt(amount).toLocaleString();
+            }
+        };
+
         const DB = {
             init() {
-                if(!localStorage.getItem('sf_users_v7')) {
+                if(!localStorage.getItem('gym_users_db')) {
+                    
                     const users = [
-                        { id: 'admin@smashfit.com', pass: '123', name: 'System Admin', role: 'admin', joined: '2023-01-01' },
-                        { id: 'member@smashfit.com', pass: '123', name: 'Kennedy O.', role: 'member', wallet: 2500, plan: 'Gold', txns: [] },
-                        { id: 'trainer@smashfit.com', pass: '123', name: 'Mike Tyson', role: 'trainer', special: 'Boxing' }
+                        { id: 'admin@smashfit.com', pass: '123', name: 'System Admin', role: 'admin' },
+                        // Member with wallet and currentPlan
+                        { id: 'member@smashfit.com', pass: '123', name: 'John Doe', role: 'member', wallet: 5000, currentPlan: null, txns: [] }
                     ];
+
+                    GymData.trainers.forEach(name => {
+                        const email = name.split(' ')[0].toLowerCase() + '@smashfit.com';
+                        users.push({ id: email, pass: '123', name: name, role: 'trainer' });
+                    });
+
                     const classes = [
-                        { id: 'c1', name: 'Morning HIIT', time: '06:00 AM', trainer: 'Mike Tyson', price: 500, cap: 20, booked: [] },
-                        { id: 'c2', name: 'Power Yoga', time: '08:00 AM', trainer: 'Sarah J.', price: 600, cap: 15, booked: [] },
-                        { id: 'c3', name: 'Boxing Pro', time: '06:00 PM', trainer: 'Mike Tyson', price: 800, cap: 10, booked: [] },
-                        { id: 'c4', name: 'CrossFit', time: '05:00 PM', trainer: 'Sarah J.', price: 750, cap: 12, booked: [] }
+                        { id: 'c1', name: 'Sunrise Spin', time: '05:30', trainer: 'Boniface Ninno', price: 1500, cap: 20, booked: [] },
+                        { id: 'c2', name: 'Abs & Core', time: '06:30', trainer: 'Frank Murule', price: 1500, cap: 25, booked: [] },
+                        { id: 'c3', name: 'Power Yoga', time: '08:00', trainer: 'Charmaine Gow', price: 1500, cap: 15, booked: [] },
+                        { id: 'c4', name: 'Afro Dance', time: '17:30', trainer: 'Steve Boycardio', price: 1500, cap: 30, booked: [] },
+                        { id: 'c5', name: 'Strength & Cond.', time: '18:30', trainer: 'Eric Tabu Juma', price: 1500, cap: 20, booked: [] },
+                        { id: 'c6', name: 'Ride or Die Spin', time: '19:00', trainer: 'Billy Wanga', price: 1500, cap: 20, booked: [] }
                     ];
-                    localStorage.setItem('sf_users_v7', JSON.stringify(users));
-                    localStorage.setItem('sf_classes_v7', JSON.stringify(classes));
+
+                    localStorage.setItem('gym_users_db', JSON.stringify(users));
+                    localStorage.setItem('gym_classes_db', JSON.stringify(classes));
                 }
             },
-            get(k) { return JSON.parse(localStorage.getItem(k + '_v7') || '[]'); },
-            set(k, v) { localStorage.setItem(k + '_v7', JSON.stringify(v)); },
+            get(k) { return JSON.parse(localStorage.getItem(k) || '[]'); },
+            set(k, v) { localStorage.setItem(k, JSON.stringify(v)); },
             
-            findUser(e, p) { return this.get('sf_users').find(u => u.id === e && u.pass === p); },
-            
+            findUser(e, p) { return this.get('gym_users_db').find(u => u.id === e && u.pass === p); },
+            getTrainers() { return this.get('gym_users_db').filter(u => u.role === 'trainer'); },
+            getClass(id) { return this.get('gym_classes_db').find(c => c.id === id); },
+
+            // --- USER TRANSACTIONS ---
             topUp(uid, amt) {
-                const users = this.get('sf_users');
+                const users = this.get('gym_users_db');
                 const u = users.find(x => x.id === uid);
                 if(u) {
                     u.wallet = (u.wallet || 0) + parseInt(amt);
                     if(!u.txns) u.txns = [];
-                    u.txns.unshift({ desc: 'Wallet Deposit', amt: amt, date: 'Just now', type: 'credit' });
-                    this.set('sf_users', users);
+                    u.txns.unshift({ desc: "Wallet Deposit", amt: amt, date: new Date().toLocaleDateString() });
+                    this.set('gym_users_db', users);
                     return true;
                 }
                 return false;
             },
 
+            subscribePlan(uid, planName, price, duration) {
+                const users = this.get('gym_users_db');
+                const u = users.find(x => x.id === uid);
+                
+                if(u.wallet < price) return { ok: false, msg: "INSUFFICIENT FUNDS" };
+                
+                // Deduct
+                u.wallet -= price;
+                // Set Plan
+                u.currentPlan = `${planName} (${duration})`;
+                // Log
+                if(!u.txns) u.txns = [];
+                u.txns.unshift({ desc: `Subscribed: ${planName} ${duration}`, amt: -price, date: new Date().toLocaleDateString() });
+                
+                this.set('gym_users_db', users);
+                return { ok: true, msg: "PLAN ACTIVATED" };
+            },
+
             bookClass(uid, cid) {
-                const users = this.get('sf_users');
-                const classes = this.get('sf_classes');
+                const users = this.get('gym_users_db');
+                const classes = this.get('gym_classes_db');
                 const u = users.find(x => x.id === uid);
                 const c = classes.find(x => x.id === cid);
 
-                if(c.booked.includes(uid)) return { ok: false, msg: "Already Booked" };
-                if(c.booked.length >= c.cap) return { ok: false, msg: "Class Full" };
-                if(u.wallet < c.price) return { ok: false, msg: "Insufficient Funds" };
+                if(c.booked.includes(uid)) return { ok: false, msg: "ALREADY BOOKED" };
+                if(c.booked.length >= c.cap) return { ok: false, msg: "CLASS FULL" };
+                if(u.wallet < c.price) return { ok: false, msg: "INSUFFICIENT FUNDS" };
 
                 u.wallet -= c.price;
                 if(!u.txns) u.txns = [];
-                u.txns.unshift({ desc: `Class: ${c.name}`, amt: -c.price, date: 'Just now', type: 'debit' });
+                u.txns.unshift({ desc: c.name, amt: -c.price, date: new Date().toLocaleDateString() });
                 c.booked.push(uid);
 
-                this.set('sf_users', users);
-                this.set('sf_classes', classes);
-                return { ok: true, msg: "Booking Confirmed" };
+                this.set('gym_users_db', users);
+                this.set('gym_classes_db', classes);
+                return { ok: true, msg: "BOOKING SUCCESSFUL" };
+            },
+
+            // Admin Logic
+            addUser(u) {
+                const users = this.get('gym_users_db');
+                if(users.find(x => x.id === u.id)) return false;
+                users.push(u);
+                this.set('gym_users_db', users);
+                return true;
+            },
+            deleteUser(uid) {
+                let users = this.get('gym_users_db');
+                let classes = this.get('gym_classes_db');
+                users = users.filter(u => u.id !== uid);
+                classes.forEach(c => c.booked = c.booked.filter(b => b !== uid));
+                this.set('gym_users_db', users);
+                this.set('gym_classes_db', classes);
+                return true;
+            },
+            addClass(c) {
+                const classes = this.get('gym_classes_db');
+                classes.push(c);
+                this.set('gym_classes_db', classes);
+            },
+            editClass(cid, data) {
+                let classes = this.get('gym_classes_db');
+                let idx = classes.findIndex(c => c.id === cid);
+                if(idx !== -1) {
+                    classes[idx] = { ...classes[idx], ...data };
+                    this.set('gym_classes_db', classes);
+                    return true;
+                }
+                return false;
+            },
+            deleteClass(cid) {
+                let classes = this.get('gym_classes_db');
+                classes = classes.filter(c => c.id !== cid);
+                this.set('gym_classes_db', classes);
             }
         };
 
-        // --- 2. CONTROLLER ---
+        // --- 2. APPLICATION CONTROLLER ---
         const App = {
             user: null,
 
@@ -299,16 +483,18 @@
                     e.preventDefault();
                     const u = DB.findUser(document.getElementById('login-email').value, document.getElementById('login-pass').value);
                     if(u) { this.user = u; this.launch(); } 
-                    else { alert('Invalid Credentials'); }
+                    else { alert('INVALID LOGIN. Try member@smashfit.com / 123'); }
                 });
             },
 
             launch() {
                 document.getElementById('auth-screen').style.display = 'none';
                 document.getElementById('app-shell').classList.remove('hidden');
+                
                 document.getElementById('user-name').innerText = this.user.name;
                 document.getElementById('user-role').innerText = this.user.role.toUpperCase();
                 document.getElementById('user-initial').innerText = this.user.name.charAt(0);
+
                 this.renderNav();
                 this.navigate('dashboard');
             },
@@ -321,327 +507,379 @@
 
                 let routes = [];
                 if(role === 'admin') routes = [
-                    { id: 'dashboard', label: 'Overview', icon: 'dashboard' },
-                    { id: 'users', label: 'Members', icon: 'group' },
-                    { id: 'classes', label: 'Schedule', icon: 'calendar_today' }
+                    { id: 'dashboard', label: 'Admin', icon: 'dashboard' },
+                    { id: 'users', label: 'Members', icon: 'groups' },
+                    { id: 'classes', label: 'Schedule', icon: 'fitness_center' }
                 ];
                 if(role === 'member') routes = [
                     { id: 'dashboard', label: 'Home', icon: 'home' },
-                    { id: 'classes', label: 'Book', icon: 'fitness_center' },
+                    { id: 'classes', label: 'Book', icon: 'calendar_today' },
                     { id: 'wallet', label: 'Wallet', icon: 'account_balance_wallet' }
                 ];
-                if(role === 'trainer') routes = [{ id: 'dashboard', label: 'My Classes', icon: 'list_alt' }];
+                if(role === 'trainer') routes = [{ id: 'dashboard', label: 'Roster', icon: 'assignment' }];
 
                 routes.forEach(r => {
-                    dNav.innerHTML += `<li class="nav-item" id="nav-${r.id}" onclick="App.navigate('${r.id}')"><i class="material-icons-round">${r.icon}</i> ${r.label}</li>`;
+                    dNav.innerHTML += `<div class="nav-item" id="nav-${r.id}" onclick="App.navigate('${r.id}')"><i class="material-icons-round">${r.icon}</i> ${r.label}</div>`;
                     mNav.innerHTML += `<button class="nav-btn" onclick="App.navigate('${r.id}')"><i class="material-icons-round">${r.icon}</i>${r.label}</button>`;
                 });
             },
 
             navigate(viewId) {
                 const container = document.getElementById('main-view');
-                const role = this.user.role;
                 document.querySelectorAll('.nav-item').forEach(e => e.classList.remove('active'));
+                document.querySelectorAll('.nav-btn').forEach(e => e.classList.remove('active'));
+                
                 const nav = document.getElementById(`nav-${viewId}`);
                 if(nav) nav.classList.add('active');
 
-                const users = DB.get('sf_users');
-                const classes = DB.get('sf_classes');
+                // Mobile active state
+                const navBtns = document.querySelectorAll('.nav-btn');
+                navBtns.forEach(btn => {
+                   if(btn.innerText.includes(viewId.toUpperCase()) || (viewId==='dashboard' && btn.innerText.includes('HOME'))) btn.classList.add('active'); 
+                });
 
-                // --- ADMIN DASHBOARD ---
-                if(role === 'admin' && viewId === 'dashboard') {
-                    const totalMembers = users.filter(u => u.role === 'member').length;
-                    const totalRev = users.reduce((acc, u) => acc + (u.wallet || 0), 0);
-                    
+                const users = DB.get('gym_users_db');
+                const classes = DB.get('gym_classes_db');
+
+                // --- VIEW: ADMIN DASHBOARD ---
+                if(this.user.role === 'admin' && viewId === 'dashboard') {
+                    const members = users.filter(u => u.role === 'member').length;
+                    const cash = users.reduce((acc, u) => acc + (u.wallet || 0), 0);
                     container.innerHTML = `
-                        <div class="flex-between" style="margin-bottom:30px;">
-                            <h2>Overview</h2>
-                            <span class="text-sm text-accent">● System Online</span>
-                        </div>
-                        <div class="bento-grid">
-                            <div class="card span-1">
-                                <div class="text-sm text-secondary">Total Members</div>
-                                <div style="font-size:2.5rem; font-weight:700;">${totalMembers}</div>
-                                <div class="text-xs text-accent">+12% this month</div>
+                        <div class="list-header"><h2>MANAGEMENT OVERVIEW</h2></div>
+                        <div class="grid-3">
+                            <div class="card">
+                                <h3 class="text-muted">TOTAL MEMBERS</h3>
+                                <h1 class="text-brand font-num" style="font-size:3.5rem">${members}</h1>
                             </div>
-                            <div class="card span-1">
-                                <div class="text-sm text-secondary">Wallet Float</div>
-                                <div style="font-size:2.5rem; font-weight:700; color:#fff;">KES ${totalRev.toLocaleString()}</div>
+                            <div class="card">
+                                <h3 class="text-muted">SYSTEM CASH FLOW</h3>
+                                <h1 class="font-num" style="font-size:3.5rem">${Utils.formatMoney(cash)}</h1>
                             </div>
-                            <div class="card span-2">
-                                <div class="flex-between">
-                                    <h3 class="text-sm text-secondary">Revenue Trend</h3>
-                                    <i class="material-icons-round text-secondary">trending_up</i>
-                                </div>
-                                <div class="chart-container">
-                                    <div class="bar" style="height:40%"></div>
-                                    <div class="bar" style="height:60%"></div>
-                                    <div class="bar" style="height:35%"></div>
-                                    <div class="bar" style="height:80%"></div>
-                                    <div class="bar active" style="height:65%"></div>
-                                    <div class="bar" style="height:50%"></div>
-                                </div>
+                            <div class="card">
+                                <h3 class="text-muted">ACTIVE CLASSES</h3>
+                                <h1 class="font-num" style="font-size:3.5rem">${classes.length}</h1>
                             </div>
-                            <div class="card span-2">
-                                <h3 style="margin-bottom:15px;">Recent Logins</h3>
-                                <div class="activity-item">
-                                    <div class="activity-icon"><i class="material-icons-round">person</i></div>
-                                    <div style="flex:1">
-                                        <div style="font-weight:500">Kennedy O.</div>
-                                        <div class="text-xs">Checked in at Front Desk</div>
-                                    </div>
-                                    <span class="text-xs">2m ago</span>
-                                </div>
-                                <div class="activity-item">
-                                    <div class="activity-icon"><i class="material-icons-round">person</i></div>
-                                    <div style="flex:1">
-                                        <div style="font-weight:500">Mike Tyson</div>
-                                        <div class="text-xs">Started 'Morning HIIT'</div>
-                                    </div>
-                                    <span class="text-xs">15m ago</span>
-                                </div>
-                            </div>
-                            <div class="card span-2">
-                                <h3 style="margin-bottom:15px;">Quick Actions</h3>
-                                <div style="display:flex; gap:10px;">
-                                    <button class="btn btn-ghost full-width" onclick="App.modalAddUser()">+ Add User</button>
-                                    <button class="btn btn-ghost full-width" onclick="App.modalAddClass()">+ Add Class</button>
-                                </div>
-                            </div>
-                        </div>
-                    `;
+                        </div>`;
                 }
-                // --- ADMIN USER LIST ---
-                else if (role === 'admin' && viewId === 'users') {
+
+                // --- VIEW: ADMIN USERS ---
+                else if(this.user.role === 'admin' && viewId === 'users') {
                     container.innerHTML = `
-                        <div class="flex-between" style="margin-bottom:20px;">
-                            <h2>Members & Staff</h2>
-                            <button class="btn btn-primary" onclick="App.modalAddUser()">New User</button>
-                        </div>
-                        <div class="bento-grid">
+                        <div class="list-header"><h2>USER DATABASE</h2><button class="btn btn-primary" onclick="App.modalAddUser()">+ ADD USER</button></div>
+                        <div class="grid-3">
                             ${users.map(u => `
-                                <div class="card span-1" style="padding:20px;">
-                                    <div class="flex-between" style="margin-bottom:15px;">
-                                        <div style="width:40px; height:40px; border-radius:10px; background:var(--bg-hover); display:grid; place-items:center; font-weight:700;">${u.name.charAt(0)}</div>
-                                        <span class="badge" style="color:${u.role==='admin'?'var(--danger)':(u.role==='member'?'var(--primary)':'var(--secondary)')}">${u.role}</span>
+                                <div class="card">
+                                    <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
+                                        <span class="text-brand font-num" style="font-size:1.2rem;">${u.role.toUpperCase()}</span>
+                                        <button class="btn-ghost" style="color:var(--brand-primary); border:none;" onclick="App.actionDeleteUser('${u.id}')"><i class="material-icons-round">delete</i></button>
                                     </div>
-                                    <div style="font-weight:600; font-size:1.1rem;">${u.name}</div>
-                                    <div class="text-xs text-secondary" style="margin-bottom:15px;">${u.id}</div>
-                                    ${u.role === 'member' ? `<button class="btn btn-ghost full-width" style="font-size:0.8rem; padding:8px;" onclick="App.actionTopUp('${u.id}')">Top Up Wallet</button>` : ''}
+                                    <h3>${u.name}</h3>
+                                    <p class="text-muted" style="margin-bottom:15px;">${u.id}</p>
+                                    ${u.role === 'member' ? `<div style="margin-bottom:10px; font-weight:bold;">Bal: ${Utils.formatMoney(u.wallet||0)}</div><button class="btn btn-ghost full-width" onclick="App.actionTopUp('${u.id}')">TOP UP WALLET</button>` : ''}
                                 </div>
                             `).join('')}
-                        </div>
-                    `;
+                        </div>`;
                 }
-                // --- ADMIN CLASSES ---
-                else if (role === 'admin' && viewId === 'classes') {
+
+                // --- VIEW: ADMIN CLASSES ---
+                else if(this.user.role === 'admin' && viewId === 'classes') {
                     container.innerHTML = `
-                        <div class="flex-between" style="margin-bottom:20px;">
-                            <h2>Class Schedule</h2>
-                            <button class="btn btn-primary" onclick="App.modalAddClass()">New Class</button>
-                        </div>
-                        <div class="bento-grid">
+                        <div class="list-header"><h2>CLASS SCHEDULE</h2><button class="btn btn-primary" onclick="App.modalAddClass()">+ SCHEDULE</button></div>
+                        <div class="grid-3">
                             ${classes.map(c => `
-                                <div class="card span-1">
-                                    <div class="flex-between" style="margin-bottom:10px;">
-                                        <span class="badge">${c.time}</span>
-                                        <span class="text-accent font-mono">KES ${c.price}</span>
+                                <div class="card">
+                                    <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
+                                        <span class="badge">${Utils.formatTime12(c.time)}</span>
+                                        <span class="text-brand font-num" style="font-size:1.2rem;">${Utils.formatMoney(c.price)}</span>
                                     </div>
-                                    <h3>${c.name}</h3>
-                                    <p class="text-xs text-secondary" style="margin-bottom:15px;">${c.trainer}</p>
-                                    <div style="background:var(--bg-hover); padding:8px; border-radius:6px; font-size:0.85rem; text-align:center;">
-                                        ${c.booked.length} / ${c.cap} Booked
+                                    <h3 style="font-size:1.5rem;">${c.name}</h3>
+                                    <p class="text-muted">COACH: ${c.trainer}</p>
+                                    <p class="text-muted" style="margin-bottom:20px;">CAPACITY: ${c.booked.length} / ${c.cap}</p>
+                                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                                        <button class="btn btn-ghost" onclick="App.modalEditClass('${c.id}')">EDIT</button>
+                                        <button class="btn btn-danger" onclick="App.actionDeleteClass('${c.id}')">DELETE</button>
                                     </div>
                                 </div>
                             `).join('')}
-                        </div>
-                    `;
+                        </div>`;
                 }
 
-                // --- MEMBER DASHBOARD ---
-                else if(role === 'member') {
-                    this.user = users.find(u => u.id === this.user.id); // Refresh
-                    const me = this.user;
-                    
-                    if(viewId === 'dashboard') {
-                        container.innerHTML = `
-                            <div class="bento-grid">
-                                <div class="card span-2" style="background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(0,0,0,0)); border: 1px solid rgba(34, 197, 94, 0.3);">
-                                    <div class="text-sm text-secondary">Wallet Balance</div>
-                                    <div style="font-size:3.5rem; font-weight:700; margin:10px 0; letter-spacing:-1px;">KES ${me.wallet.toLocaleString()}</div>
-                                    <div class="flex-between">
-                                        <span class="text-xs">ID: ${me.id}</span>
-                                        <button class="btn btn-ghost" style="padding:6px 12px; font-size:0.75rem;">View History</button>
+                // --- VIEW: MEMBER HOME ---
+                else if(this.user.role === 'member' && viewId === 'dashboard') {
+                    this.user = users.find(u => u.id === this.user.id); // Refresh data
+                    container.innerHTML = `
+                        <div class="grid-2">
+                            <div class="card" style="border-left: 5px solid var(--brand-primary); background: linear-gradient(135deg, #101010 0%, #1f0505 100%);">
+                                <div style="display:flex; justify-content:space-between; align-items:start;">
+                                    <div>
+                                        <h3 class="text-muted">WALLET BALANCE</h3>
+                                        <h1 class="text-white font-num" style="font-size: 3.5rem; line-height:1; margin: 10px 0;">${Utils.formatMoney(this.user.wallet)}</h1>
                                     </div>
+                                    <button onclick="App.memberTopUp()" class="btn btn-primary" style="font-size:1rem; padding:8px 16px;">+ ADD FUNDS</button>
                                 </div>
-                                
-                                <div class="card span-2">
-                                    <div class="text-sm text-secondary">Next Class</div>
-                                    <div style="font-size:1.5rem; font-weight:700; margin:10px 0;">Morning HIIT</div>
-                                    <div class="flex-between">
-                                        <span class="badge">06:00 AM</span>
-                                        <span class="text-xs text-accent">Tomorrow</span>
-                                    </div>
-                                </div>
+                                <p class="text-muted">Available for Plans & Classes</p>
+                            </div>
+                            
+                            <div class="card" style="display:flex; flex-direction:column; justify-content:center;">
+                                <h3 class="text-muted">CURRENT STATUS</h3>
+                                ${this.user.currentPlan ? 
+                                    `<h1 class="text-brand font-num" style="font-size:2.5rem; margin-top:10px;">${this.user.currentPlan}</h1><div class="badge" style="background:#28a745; width:fit-content; margin-top:5px;">ACTIVE</div>` : 
+                                    `<h1 class="text-white font-num" style="font-size:2rem; margin-top:10px;">NO ACTIVE PLAN</h1><p class="text-muted">Select a plan below to start.</p>`
+                                }
+                            </div>
+                        </div>
 
-                                <div class="card span-4">
-                                    <h3 class="text-sm text-secondary">Weekly Consistency</h3>
-                                    <div class="chart-container" style="height:150px;">
-                                        <div class="bar" style="height:30%"></div>
-                                        <div class="bar" style="height:50%"></div>
-                                        <div class="bar" style="height:20%"></div>
-                                        <div class="bar active" style="height:80%"></div>
-                                        <div class="bar" style="height:60%"></div>
-                                        <div class="bar" style="height:90%"></div>
-                                        <div class="bar" style="height:40%"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        `;
-                    }
-                    else if (viewId === 'classes') {
-                        container.innerHTML = `
-                            <h2>Book a Class</h2>
-                            <div class="bento-grid" style="margin-top:20px;">
-                                ${classes.map(c => {
-                                    const isBooked = c.booked.includes(me.id);
-                                    return `
-                                        <div class="card span-1" style="border:${isBooked ? '1px solid var(--primary)':''}">
-                                            <div class="flex-between" style="margin-bottom:10px;">
-                                                <span class="badge">${c.time}</span>
-                                                <span class="text-accent font-mono">KES ${c.price}</span>
-                                            </div>
-                                            <h3>${c.name}</h3>
-                                            <p class="text-xs text-secondary" style="margin-bottom:15px;">${c.trainer}</p>
-                                            ${isBooked ? 
-                                                `<button class="btn btn-ghost full-width" style="color:var(--primary)" disabled>Booked</button>` :
-                                                `<button class="btn btn-primary full-width" onclick="App.actionBook('${c.id}')">Book Now</button>`
-                                            }
+                        <div style="margin-top: 40px;">
+                             <h2 class="text-white" style="margin-bottom: 20px; font-size:2rem;">CHOOSE YOUR PLAN</h2>
+                             <div class="grid-3">
+                                ${GymData.membership.map(m => `
+                                    <div class="card ${m.css}">
+                                        <h2 style="font-size:2.2rem; margin-bottom:15px; border-bottom:1px solid rgba(255,255,255,0.2); padding-bottom:10px;">${m.type}</h2>
+                                        
+                                        <div style="margin-bottom:15px;">
+                                            <label style="font-size:0.8rem; font-weight:bold; color: inherit; opacity:0.8;">SELECT DURATION:</label>
+                                            <select id="sel-${m.type}" style="background:rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.2); color:inherit; font-weight:bold;">
+                                                ${m.plans.map(p => `<option value="${p.price}|${p.dur}">${p.dur} - ${Utils.formatMoney(p.price)}</option>`).join('')}
+                                            </select>
                                         </div>
-                                    `;
-                                }).join('')}
-                            </div>
-                        `;
-                    }
-                    else if (viewId === 'wallet') {
-                        const txns = me.txns || [];
-                        container.innerHTML = `
-                            <h2>Transaction History</h2>
-                            <div class="card" style="margin-top:20px; padding:0;">
-                                ${txns.map(t => `
-                                    <div class="activity-item" style="padding:15px 20px;">
-                                        <div class="activity-icon" style="color:${t.type==='credit'?'var(--primary)':'var(--danger)'}">
-                                            <i class="material-icons-round">${t.type==='credit'?'arrow_downward':'arrow_upward'}</i>
-                                        </div>
-                                        <div style="flex:1">
-                                            <div style="font-weight:600;">${t.desc}</div>
-                                            <div class="text-xs text-secondary">${t.date}</div>
-                                        </div>
-                                        <div class="font-mono" style="color:${t.type==='credit'?'var(--primary)':'#fff'}">
-                                            ${t.type==='credit'?'+':''}${t.amt}
-                                        </div>
+
+                                        <ul style="list-style:none; padding:0; margin-bottom:20px; font-size:0.9rem; line-height:1.6; opacity:0.9;">
+                                            <li><i class="material-icons-round" style="font-size:14px;">check</i> Gym Floor Access</li>
+                                            <li><i class="material-icons-round" style="font-size:14px;">check</i> Locker Access</li>
+                                            ${m.type === 'Gold' ? '<li><i class="material-icons-round" style="font-size:14px;">star</i> Sauna & Steam</li>' : ''}
+                                        </ul>
+
+                                        <button class="btn full-width" style="background:rgba(0,0,0,0.5); border:1px solid rgba(255,255,255,0.5); color:inherit;" 
+                                            onmouseover="this.style.background='rgba(255,255,255,0.2)'" 
+                                            onmouseout="this.style.background='rgba(0,0,0,0.5)'"
+                                            onclick="App.memberSubscribe('${m.type}')">
+                                            SUBSCRIBE NOW
+                                        </button>
                                     </div>
                                 `).join('')}
-                                ${txns.length===0 ? '<div style="padding:30px; text-align:center" class="text-secondary">No history found.</div>' : ''}
-                            </div>
-                        `;
+                             </div>
+                        </div>
+
+                        <div class="card" style="margin-top:20px;">
+                            <h3><i class="material-icons-round" style="vertical-align:middle; color:var(--brand-primary)">info</i> MISSION STATEMENT</h3>
+                            <p class="text-white" style="margin-top:10px; font-style: italic;">"${GymData.info.mission}"</p>
+                        </div>
+                    `;
+                }
+
+                // --- VIEW: MEMBER CLASSES ---
+                else if(this.user.role === 'member' && viewId === 'classes') {
+                    container.innerHTML = `
+                        <div class="list-header"><h2>BOOK A CLASS</h2></div>
+                        <div class="grid-3">
+                            ${classes.map(c => {
+                                const isBooked = c.booked.includes(this.user.id);
+                                return `
+                                <div class="card">
+                                    <div style="display:flex; justify-content:space-between;">
+                                        <span class="badge">${Utils.formatTime12(c.time)}</span>
+                                        <span class="font-num text-brand" style="font-size:1.2rem;">${Utils.formatMoney(c.price)}</span>
+                                    </div>
+                                    <h3 style="margin:10px 0; font-size:1.4rem;">${c.name}</h3>
+                                    <p class="text-muted" style="margin-bottom:15px;">Coach: <span class="text-white">${c.trainer}</span></p>
+                                    <button class="btn ${isBooked ? 'btn-ghost' : 'btn-primary'} full-width" onclick="App.actionBook('${c.id}')" ${isBooked?'disabled':''}>
+                                        ${isBooked ? 'BOOKED' : 'BOOK SPOT'}
+                                    </button>
+                                </div>`;
+                            }).join('')}
+                        </div>
+                        <div class="card" style="margin-top:20px;">
+                            <h3>OTHER SERVICES</h3>
+                            <p class="text-white">Day Pass: <strong>KES 1,500</strong> | Personal Training: <strong>KES 2,000</strong> | Couples PT: <strong>KES 3,000</strong></p>
+                        </div>
+                    `;
+                }
+
+                // --- VIEW: MEMBER WALLET ---
+                else if(this.user.role === 'member' && viewId === 'wallet') {
+                    this.user = users.find(u => u.id === this.user.id);
+                    container.innerHTML = `
+                        <div class="list-header"><h2>TRANSACTION HISTORY</h2></div>
+                        <div class="card">
+                            ${(this.user.txns && this.user.txns.length > 0) ? this.user.txns.map(t => `
+                                <div style="display:flex; justify-content:space-between; border-bottom:1px solid #222; padding:15px 0;">
+                                    <div>
+                                        <div style="font-weight:bold; color:#fff; font-size:1.1rem;">${t.desc}</div>
+                                        <div class="text-muted" style="font-size:0.8rem;">${t.date}</div>
+                                    </div>
+                                    <div class="font-num ${parseInt(t.amt)<0 ? 'text-brand' : 'text-success'}" style="font-size:1.2rem;">
+                                        ${parseInt(t.amt) > 0 ? '+' : ''} ${t.amt}
+                                    </div>
+                                </div>`).join('') : '<p class="text-muted">No transactions yet.</p>'}
+                        </div>`;
+                }
+
+                // --- VIEW: TRAINER ROSTER ---
+                else if(this.user.role === 'trainer') {
+                    const myClasses = classes.filter(c => c.trainer === this.user.name);
+                    container.innerHTML = `
+                        <div class="list-header"><h2>COACH PORTAL: ${this.user.name}</h2></div>
+                        <div class="grid-3">
+                            ${myClasses.length === 0 ? '<p class="text-muted">No classes assigned today.</p>' : ''}
+                            ${myClasses.map(c => {
+                                const names = c.booked.map(uid => {
+                                    const u = users.find(x => x.id === uid);
+                                    return u ? u.name : 'Unknown';
+                                });
+                                return `
+                                <div class="card">
+                                    <div style="display:flex; justify-content:space-between;">
+                                        <span class="badge" style="font-size:1rem;">${Utils.formatTime12(c.time)}</span>
+                                        <span class="font-num text-brand">${c.booked.length} / ${c.cap}</span>
+                                    </div>
+                                    <h3 style="margin:10px 0;">${c.name}</h3>
+                                    <div class="roster-container">
+                                        <h4 class="text-muted" style="font-size:0.8rem; margin-bottom:5px;">ATHLETE ROSTER:</h4>
+                                        ${names.length > 0 ? names.map(n => `<div class="roster-item"><span>${n}</span><i class="material-icons-round" style="font-size:1rem; color:#4CD964">check_circle</i></div>`).join('') : '<div class="text-muted" style="padding:10px 0;">No bookings yet.</div>'}
+                                    </div>
+                                </div>`;
+                            }).join('')}
+                        </div>`;
+                }
+            },
+
+            // --- USER ACTIONS ---
+            
+            // 1. Quick Top Up Logic
+            memberTopUp() {
+                const amt = prompt("ENTER AMOUNT TO TOP UP (KES):");
+                if(amt && !isNaN(amt) && amt > 0) {
+                    DB.topUp(this.user.id, amt);
+                    this.toast("FUNDS ADDED TO WALLET");
+                    this.navigate('dashboard'); // Refresh Dashboard
+                } else {
+                    alert("Invalid Amount");
+                }
+            },
+
+            // 2. Subscription Logic
+            memberSubscribe(planType) {
+                // Get the dropdown element
+                const select = document.getElementById(`sel-${planType}`);
+                const val = select.value.split('|'); // e.g. "8500|Monthly"
+                const price = parseInt(val[0]);
+                const dur = val[1];
+
+                if(confirm(`Confirm Subscription: ${planType} Membership (${dur}) for KES ${price}?`)) {
+                    const res = DB.subscribePlan(this.user.id, planType, price, dur);
+                    if(res.ok) {
+                        this.toast("MEMBERSHIP ACTIVATED! WELCOME TO THE CLUB.");
+                        this.navigate('dashboard');
+                    } else {
+                        // Not enough funds? Ask to top up.
+                        if(confirm("Insufficient Funds in Wallet. Would you like to Top Up now?")) {
+                            this.memberTopUp();
+                        }
                     }
                 }
             },
 
-            // --- ACTIONS ---
+            // 3. Class Booking Logic
+            actionBook(cid) {
+                if(confirm("CONFIRM BOOKING? Amount will be deducted from wallet.")) {
+                    const res = DB.bookClass(this.user.id, cid);
+                    if(res.ok) { this.toast("BOOKED! SEE YOU THERE."); this.navigate('classes'); } else { alert(res.msg); }
+                }
+            },
+
+            // Admin Actions
             modalAddUser() {
                 document.getElementById('modal-content').innerHTML = `
-                    <div style="padding:24px;">
-                        <h3 style="margin-bottom:20px;">Add User</h3>
+                    <div style="padding:25px;">
+                        <h3 style="margin-bottom:20px;">REGISTER NEW USER</h3>
                         <form onsubmit="App.performAddUser(event)">
-                            <select id="n-role"><option value="member">Member</option><option value="trainer">Trainer</option><option value="admin">Admin</option></select>
-                            <input id="n-email" placeholder="Email" required>
-                            <input id="n-name" placeholder="Name" required>
-                            <input id="n-pass" value="123" placeholder="Password">
-                            <button class="btn btn-primary full-width">Create</button>
+                            <div class="input-group">
+                                <label>System Role</label>
+                                <select id="n-role">
+                                    <option value="member">Member</option>
+                                    <option value="trainer">Trainer</option>
+                                    <option value="admin">Admin</option>
+                                </select>
+                            </div>
+                            <div class="input-group"><label>Email Address</label><input id="n-id" required></div>
+                            <div class="input-group"><label>Full Name</label><input id="n-name" required></div>
+                            <div class="input-group"><label>Default Password</label><input id="n-pass" required value="123"></div>
+                            <button class="btn btn-primary full-width">CREATE ACCOUNT</button>
                         </form>
-                        <button class="btn btn-ghost full-width" style="margin-top:10px;" onclick="App.closeModal()">Cancel</button>
-                    </div>
-                `;
+                        <button class="btn btn-ghost full-width" onclick="App.closeModal()" style="margin-top:10px;">CANCEL</button>
+                    </div>`;
                 document.getElementById('modal-overlay').style.display = 'flex';
             },
-            
+
             modalAddClass() {
                 document.getElementById('modal-content').innerHTML = `
-                    <div style="padding:24px;">
-                        <h3 style="margin-bottom:20px;">Add Class</h3>
+                    <div style="padding:25px;">
+                        <h3 style="margin-bottom:20px;">SCHEDULE NEW CLASS</h3>
                         <form onsubmit="App.performAddClass(event)">
-                            <input id="c-name" placeholder="Class Name" required>
-                            <input id="c-time" placeholder="09:00 AM" required>
-                            <input id="c-trainer" placeholder="Trainer Name" required>
-                            <input id="c-price" type="number" placeholder="Price (KES)" required>
-                            <button class="btn btn-primary full-width">Publish</button>
+                            <div class="input-group"><label>Class Name</label><input id="c-name" required placeholder="e.g., Core Blast"></div>
+                            <div class="input-group"><label>Start Time (24h)</label><input type="time" id="c-time" required></div>
+                            <div class="input-group">
+                                <label>Coach</label>
+                                <select id="c-trainer">
+                                    ${GymData.trainers.map(t => `<option value="${t}">${t}</option>`).join('')}
+                                </select>
+                            </div>
+                            <div class="input-group"><label>Price (KES)</label><input type="number" id="c-price" required value="1500"></div>
+                            <button class="btn btn-primary full-width">PUBLISH TO SCHEDULE</button>
                         </form>
-                        <button class="btn btn-ghost full-width" style="margin-top:10px;" onclick="App.closeModal()">Cancel</button>
-                    </div>
-                `;
+                        <button class="btn btn-ghost full-width" onclick="App.closeModal()" style="margin-top:10px;">CANCEL</button>
+                    </div>`;
+                document.getElementById('modal-overlay').style.display = 'flex';
+            },
+
+            modalEditClass(cid) {
+                const c = DB.getClass(cid);
+                document.getElementById('modal-content').innerHTML = `
+                    <div style="padding:25px;">
+                        <h3 style="margin-bottom:20px;">EDIT CLASS DETAILS</h3>
+                        <form onsubmit="App.performEditClass(event, '${cid}')">
+                            <div class="input-group"><label>Class Name</label><input id="e-name" value="${c.name}" required></div>
+                            <div class="input-group"><label>Start Time</label><input type="time" id="e-time" value="${c.time}" required></div>
+                            <div class="input-group">
+                                <label>Coach</label>
+                                <select id="e-trainer">
+                                    ${GymData.trainers.map(t => `<option value="${t}" ${t===c.trainer?'selected':''}>${t}</option>`).join('')}
+                                </select>
+                            </div>
+                            <div class="input-group"><label>Price (KES)</label><input type="number" id="e-price" value="${c.price}" required></div>
+                            <button class="btn btn-primary full-width">SAVE CHANGES</button>
+                        </form>
+                        <button class="btn btn-ghost full-width" onclick="App.closeModal()" style="margin-top:10px;">CANCEL</button>
+                    </div>`;
                 document.getElementById('modal-overlay').style.display = 'flex';
             },
 
             performAddUser(e) {
                 e.preventDefault();
-                const u = {
-                    id: document.getElementById('n-email').value,
-                    name: document.getElementById('n-name').value,
-                    pass: document.getElementById('n-pass').value,
-                    role: document.getElementById('n-role').value,
-                    wallet: 0, txns: []
-                };
-                const users = DB.get('sf_users');
-                users.push(u);
-                DB.set('sf_users', users);
-                this.closeModal();
-                this.toast('User Added');
-                this.navigate('users');
+                const u = { id: document.getElementById('n-id').value, name: document.getElementById('n-name').value, pass: document.getElementById('n-pass').value, role: document.getElementById('n-role').value, wallet: 0, txns: [] };
+                if(DB.addUser(u)) { App.closeModal(); App.toast("USER ADDED SUCCESSFULLY"); App.navigate('users'); } else { alert("EMAIL ALREADY EXISTS"); }
             },
-
             performAddClass(e) {
                 e.preventDefault();
-                const c = {
-                    id: 'c'+Date.now(),
-                    name: document.getElementById('c-name').value,
-                    time: document.getElementById('c-time').value,
-                    trainer: document.getElementById('c-trainer').value,
-                    price: parseInt(document.getElementById('c-price').value),
-                    cap: 20, booked: []
-                };
-                const classes = DB.get('sf_classes');
-                classes.push(c);
-                DB.set('sf_classes', classes);
-                this.closeModal();
-                this.toast('Class Published');
-                this.navigate('classes');
+                DB.addClass({ id: 'c'+Date.now(), name: document.getElementById('c-name').value, time: document.getElementById('c-time').value, trainer: document.getElementById('c-trainer').value, price: parseInt(document.getElementById('c-price').value), cap: 20, booked: [] });
+                App.closeModal(); App.toast("CLASS PUBLISHED"); App.navigate('classes');
+            },
+            performEditClass(e, cid) {
+                e.preventDefault();
+                DB.editClass(cid, { name: document.getElementById('e-name').value, time: document.getElementById('e-time').value, trainer: document.getElementById('e-trainer').value, price: parseInt(document.getElementById('e-price').value) });
+                App.closeModal(); App.toast("CLASS UPDATED"); App.navigate('classes');
             },
 
-            actionTopUp(uid) {
-                const amt = prompt("Enter Amount (KES):");
-                if(amt && DB.topUp(uid, amt)) { this.toast('Wallet Updated'); this.navigate('users'); }
-            },
-
-            actionBook(cid) {
-                if(!confirm("Confirm Booking?")) return;
-                const res = DB.bookClass(this.user.id, cid);
-                if(res.ok) { this.toast(res.msg); this.navigate('classes'); } 
-                else { alert(res.msg); }
-            },
-
-            closeModal() { document.getElementById('modal-overlay').style.display = 'none'; },
+            actionDeleteUser(uid) { if(confirm("PERMANENTLY DELETE USER?")) { DB.deleteUser(uid); App.toast("USER DELETED"); App.navigate('users'); } },
+            actionDeleteClass(cid) { if(confirm("CANCEL THIS CLASS?")) { DB.deleteClass(cid); App.toast("CLASS CANCELLED"); App.navigate('classes'); } },
+            actionTopUp(uid) { const amt = prompt("ENTER AMOUNT TO TOP UP (KES):"); if(amt && !isNaN(amt)) { DB.topUp(uid, amt); App.toast("WALLET CREDITED"); App.navigate('users'); } },
             
+            closeModal() { document.getElementById('modal-overlay').style.display = 'none'; },
             toast(msg) {
                 const t = document.getElementById('toast');
-                t.innerText = msg;
-                t.style.transform = 'translateY(0)';
-                setTimeout(() => t.style.transform = 'translateY(100px)', 3000);
-            },
-
-            factoryReset() {
-                if(confirm("Reset Database?")) { localStorage.clear(); location.reload(); }
+                t.innerText = msg; t.style.transform = 'translateY(0)';
+                setTimeout(() => t.style.transform = 'translateY(150px)', 3500);
             }
         };
 
