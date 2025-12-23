@@ -522,6 +522,9 @@
                     dNav.innerHTML += `<div class="nav-item" id="nav-${r.id}" onclick="App.navigate('${r.id}')"><i class="material-icons-round">${r.icon}</i> ${r.label}</div>`;
                     mNav.innerHTML += `<button class="nav-btn" onclick="App.navigate('${r.id}')"><i class="material-icons-round">${r.icon}</i>${r.label}</button>`;
                 });
+
+                // MOBILE FIX: Add Logout Button to Bottom Nav
+                mNav.innerHTML += `<button class="nav-btn" style="color:var(--brand-primary);" onclick="location.reload()"><i class="material-icons-round">logout</i>Logout</button>`;
             },
 
             navigate(viewId) {
