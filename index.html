@@ -3,36 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Smash Fit | Smash Your Goals</title>
+    <title>Smash Fit | System</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Teko:wght@300;400;500;600;700&family=Roboto+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
 
     <style>
-        /* ==================== 1. GYM THEME ENGINE ==================== */
+        /* ==================== GYM THEME ENGINE ==================== */
         :root {
-            /* Brand Identity */
-            --brand-primary: #FF3B30; /* High Energy Red */
+            --brand-primary: #FF3B30; 
             --brand-dark: #8E0000;
-            --brand-accent: #1C1C1E;
+            --brand-success: #39FF14; /* NEON GREEN for Check In */
+            --brand-gold: #FFD700;
             
-            /* Dark Mode Core */
+            /* RED HEATMAP PALETTE (Light = Low, Dark = High) */
+            --hm-0: #1a0505; /* Empty - Very dark red/black */
+            --hm-1: #FFB3B3; /* Light Red */
+            --hm-2: #FF6666; /* Medium Red */
+            --hm-3: #FF0000; /* Standard Red */
+            --hm-4: #8B0000; /* Dark Deep Red (Highest Activity) */
+
+            /* UPI BRANDING */
+            --brand-upi: #1a73e8;
+            --brand-gpay: #fff;
+            --brand-phonepe: #6739b7;
+            --brand-paytm: #00b9f1;
+
             --bg-body: #050505;
             --bg-panel: #0F0F0F;
-            --bg-card: #141414;
+            --bg-card: #141414; /* Solid color, no transparency/blur */
             --bg-input: #000000;
-            
-            /* Typography */
             --font-head: 'Teko', sans-serif;
             --font-body: 'Roboto Condensed', sans-serif;
-
-            /* Borders & Effects */
             --border: 1px solid #333333;
-            --border-active: 1px solid #FF3B30;
-            --shadow: 0 10px 30px rgba(0,0,0,0.8);
-            
-            /* Dimensions */
             --nav-width: 280px;
         }
 
@@ -45,158 +49,204 @@
             height: 100vh;
             overflow: hidden;
             display: flex;
-            /* Industrial Gym Texture */
-            background-image: 
-                linear-gradient(rgba(0,0,0,0.92), rgba(0,0,0,0.92)),
-                url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070&auto=format&fit=crop');
+            background-image: linear-gradient(rgba(0,0,0,0.95), rgba(0,0,0,0.98)), url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
         }
 
-        /* Typography */
         h1, h2, h3, h4 { font-family: var(--font-head); text-transform: uppercase; letter-spacing: 1px; font-weight: 600; margin: 0; line-height: 1.1; }
-        p { line-height: 1.5; color: #aaa; }
+        p { line-height: 1.5; color: #aaa; margin-bottom: 5px; }
         .text-brand { color: var(--brand-primary); }
         .text-white { color: #fff; }
+        .text-success { color: var(--brand-success); }
         .font-num { font-family: var(--font-head); letter-spacing: 1px; }
 
-        /* UI Components */
+        /* --- BUTTONS --- */
         .btn {
-            padding: 12px 24px; border: none; font-weight: 500; cursor: pointer; text-transform: uppercase;
-            font-family: var(--font-head); font-size: 1.2rem; letter-spacing: 1px; transition: 0.2s;
+            padding: 14px 24px; border: none; font-weight: 600; cursor: pointer; text-transform: uppercase;
+            font-family: var(--font-head); font-size: 1.3rem; letter-spacing: 1px; transition: all 0.3s ease;
             display: inline-flex; align-items: center; justify-content: center; gap: 8px;
             clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
             text-decoration: none;
+            color: #fff;
         }
         .btn:active { transform: scale(0.96); }
         
-        .btn-primary { background: var(--brand-primary); color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,0.5); }
-        .btn-primary:hover { background: #ff5f56; box-shadow: 0 0 20px rgba(255, 59, 48, 0.4); }
-        
-        .btn-ghost { background: transparent; border: 1px solid #444; color: #fff; }
+        .btn-primary { 
+            background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-dark) 100%); 
+            color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+            box-shadow: 0 4px 15px rgba(255, 59, 48, 0.3);
+        }
+        .btn-primary:hover { 
+            background: linear-gradient(135deg, #ff5f56 0%, #b30000 100%); 
+            transform: translateY(-2px);
+        }
+
+        /* CHECK IN BUTTON - NEON GREEN */
+        .btn-checkin {
+            background: var(--brand-success);
+            color: #000;
+            text-shadow: none;
+            font-weight: 700;
+            box-shadow: 0 0 15px rgba(57, 255, 20, 0.4);
+        }
+        .btn-checkin:hover {
+            background: #fff;
+            box-shadow: 0 0 25px rgba(57, 255, 20, 0.8);
+        }
+        .btn-checkout {
+            background: #333;
+            color: #fff;
+            border: 1px solid #555;
+        }
+
+        /* Payment Buttons */
+        .btn-gpay { background: #fff; color: #333; border: 1px solid #ddd; }
+        .btn-phonepe { background: #6739b7; color: #fff; }
+        .btn-paytm { background: #00b9f1; color: #fff; }
+        .btn-upi-generic { background: linear-gradient(135deg, #2193b0, #6dd5ed); color: #fff; }
+
+        .btn-ghost { background: transparent; border: 1px solid #555; color: #fff; }
         .btn-ghost:hover { border-color: var(--brand-primary); color: var(--brand-primary); background: rgba(255,59,48,0.1); }
         
         .btn-danger { background: rgba(255, 69, 58, 0.1); color: var(--brand-primary); border: 1px solid var(--brand-primary); }
         .btn-danger:hover { background: var(--brand-primary); color: #fff; }
 
+        .btn-icon-only { padding: 8px 12px; clip-path: none; border-radius: 4px; border: 1px solid #333; background: #111; color: #888; cursor: pointer; transition: 0.2s; }
+        .btn-icon-only:hover { background: #222; color: #fff; border-color: #555; }
+
         .full-width { width: 100%; }
 
-        /* Cards */
+        /* --- CARDS --- */
         .card {
             background: var(--bg-card); border: var(--border); padding: 24px;
-            margin-bottom: 20px; position: relative; transition: 0.3s;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            margin-bottom: 20px; position: relative; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            /* NO BLUR as requested */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5); 
         }
         .card:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(0,0,0,0.5); border-color: #555; }
-        .card::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%;
-            background: #333; transition: 0.3s;
-        }
-        .card:hover::before { background: var(--brand-primary); }
         
-        /* === UPGRADED MEMBERSHIP CARDS === */
-        .card-bronze { 
-            background: linear-gradient(160deg, #1e1e1e 0%, #3e2723 100%); 
-            border: 1px solid #8D6E63; 
-        }
-        .card-bronze h2 { color: #D7CCC8; }
-        .card-bronze::before { background: #D7CCC8; }
+        .card-plan { display: flex; flex-direction: column; justify-content: space-between; height: 100%; }
 
-        .card-silver { 
-            background: linear-gradient(160deg, #1e1e1e 0%, #37474F 100%); 
-            border: 1px solid #90A4AE;
-        }
-        .card-silver h2 { color: #CFD8DC; }
-        .card-silver::before { background: #CFD8DC; }
+        .card-bronze { background: linear-gradient(160deg, #181818 0%, #2d1f1b 100%); border-color: #8D6E63; }
+        .card-silver { background: linear-gradient(160deg, #181818 0%, #263238 100%); border-color: #90A4AE; }
+        .card-gold { background: linear-gradient(160deg, #181818 0%, #332903 100%); border-color: #FFD700; }
 
-        .card-gold { 
-            background: linear-gradient(160deg, #1e1e1e 0%, #463805 100%); 
-            border: 1px solid #FFD700;
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.1);
+        /* --- RED HEATMAP STYLES --- */
+        .heatmap-ui {
+            background: #080808; border: 1px solid #222; border-radius: 16px; padding: 25px; 
+            position: relative; overflow: hidden; box-shadow: inset 0 0 50px rgba(0,0,0,0.8);
         }
-        .card-gold h2 { color: #FFD700; }
-        .card-gold::before { background: #FFD700; }
+        /* Top Glow Bar */
+        .heatmap-ui::before {
+            content:''; position: absolute; top:0; left:50%; transform: translateX(-50%); width:80%; height:2px;
+            background: linear-gradient(90deg, transparent, var(--hm-3), transparent);
+            box-shadow: 0 0 15px var(--hm-3);
+        }
+        
+        .hm-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 25px; }
+        .hm-title-group h2 { font-size: 2.8rem; line-height: 0.9; color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.1); }
+        .hm-title-group span { color: var(--hm-3); font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; font-weight: bold; }
+        
+        .hm-controls { display: flex; gap: 15px; align-items: center; }
+        
+        /* Circular Stat Ring */
+        .hm-stat-ring {
+            width: 50px; height: 50px; border-radius: 50%;
+            background: conic-gradient(var(--hm-3) var(--p, 0%), #222 0%);
+            display: flex; align-items: center; justify-content: center;
+            position: relative; box-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
+        }
+        .hm-stat-ring::after {
+            content: ''; position: absolute; inset: 4px; background: #080808; border-radius: 50%;
+        }
+        .hm-stat-num { position: absolute; z-index: 2; font-size: 1.2rem; color: #fff; font-family: var(--font-head); }
+        
+        .hm-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; }
+        .hm-day-head { text-align: center; color: #444; font-size: 0.9rem; font-weight: bold; margin-bottom: 5px; font-family: var(--font-head); letter-spacing: 1px; }
+        
+        /* The Isotope Cell */
+        .iso-cell {
+            aspect-ratio: 1; background: #111; border-radius: 8px; position: relative; cursor: pointer;
+            border: 1px solid #222; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex; align-items: center; justify-content: center;
+        }
+        
+        /* The Core (Inner Light) */
+        .iso-core {
+            width: 60%; height: 60%; border-radius: 4px; background: var(--hm-0); transition: 0.3s;
+            display: flex; align-items: center; justify-content: center; font-family: var(--font-head); font-size: 1rem;
+            color: rgba(255,255,255,0.2); box-shadow: inset 0 0 5px rgba(0,0,0,0.5);
+        }
 
-        /* Inputs */
+        .iso-cell:hover { transform: scale(1.2) translateY(-5px); z-index: 10; border-color: #fff; box-shadow: 0 15px 30px rgba(0,0,0,0.9); }
+        .iso-cell:hover .iso-core { color: #fff; transform: scale(1.1); }
+        
+        /* Intensity Levels (RED SCALE) */
+        .iso-0 .iso-core { background: var(--hm-0); }
+        .iso-1 .iso-core { background: var(--hm-1); color: #000; box-shadow: 0 0 5px var(--hm-1); } /* Light Red */
+        .iso-2 .iso-core { background: var(--hm-2); color: #000; box-shadow: 0 0 8px var(--hm-2); }
+        .iso-3 .iso-core { background: var(--hm-3); color: #fff; box-shadow: 0 0 12px var(--hm-3); }
+        .iso-4 .iso-core { 
+            background: var(--hm-4); box-shadow: 0 0 20px var(--hm-4); /* Dark Red */
+            color: #fff; font-weight: bold; animation: pulse-core 2s infinite;
+        }
+        .iso-4 { border-color: var(--hm-3); }
+
+        @keyframes pulse-core {
+            0% { box-shadow: 0 0 10px var(--hm-3); }
+            50% { box-shadow: 0 0 25px var(--hm-3); }
+            100% { box-shadow: 0 0 10px var(--hm-3); }
+        }
+
+        .iso-cell::after {
+            content: attr(data-info); position: absolute; bottom: 125%; left: 50%; transform: translateX(-50%);
+            background: #fff; color: #000; padding: 4px 10px; border-radius: 4px;
+            font-size: 0.8rem; white-space: nowrap; opacity: 0; pointer-events: none;
+            transition: 0.2s; font-weight: bold; box-shadow: 0 5px 15px rgba(0,0,0,0.8);
+        }
+        .iso-cell:hover::after { opacity: 1; bottom: 135%; }
+
+        /* --- INPUTS --- */
         .input-group { margin-bottom: 20px; }
         .input-group label { display: block; margin-bottom: 8px; color: #888; font-size: 0.8rem; text-transform: uppercase; font-weight: bold; letter-spacing: 1px; }
-        input, select {
-            width: 100%; padding: 14px; background: var(--bg-input); border: 1px solid #333;
-            color: #fff; font-size: 1rem; transition: 0.2s; font-family: var(--font-body);
+        input, select, textarea { 
+            width: 100%; padding: 14px; background: #000 !important; border: 1px solid #333; 
+            color: #fff !important; font-size: 1rem; transition: 0.2s; font-family: var(--font-body); border-radius: 4px;
         }
-        input:focus, select:focus { border-color: var(--brand-primary); box-shadow: 0 0 0 2px rgba(255, 59, 48, 0.2); }
+        select option { background: #000; color: #fff; }
+        input:focus, select:focus, textarea:focus { border-color: var(--brand-primary); box-shadow: 0 0 0 2px rgba(255, 59, 48, 0.2); }
 
-        /* Layout */
+        /* --- LAYOUT --- */
         .app-shell { display: flex; width: 100%; height: 100%; }
-        
-        /* Sidebar */
-        .sidebar {
-            width: var(--nav-width); background: var(--bg-panel); border-right: var(--border);
-            display: flex; flex-direction: column; padding: 0; z-index: 50;
-        }
-        .sidebar-header {
-            padding: 30px; text-align: center; border-bottom: 1px solid #222;
-            background: linear-gradient(180deg, rgba(20,20,20,1) 0%, rgba(15,15,15,1) 100%);
-            display: flex; justify-content: center; align-items: center;
-        }
-        .sidebar-logo { max-width: 140px; height: auto; display: block; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); }
-        .auth-logo { max-width: 160px; height: auto; display: block; margin: 0 auto 15px auto; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.6)); }
-
-        .logo-text { font-family: 'Teko'; font-size: 3rem; color: #fff; line-height: 0.8; font-weight: 700; }
+        .sidebar { width: var(--nav-width); background: var(--bg-panel); border-right: var(--border); display: flex; flex-direction: column; padding: 0; z-index: 50; }
+        .sidebar-header { padding: 30px; text-align: center; border-bottom: 1px solid #222; background: linear-gradient(180deg, rgba(20,20,20,1) 0%, rgba(15,15,15,1) 100%); }
+        .sidebar-logo { max-width: 140px; height: auto; display: block; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); margin: 0 auto; }
+        .logo-text { font-family: 'Teko'; font-size: 3rem; color: #fff; line-height: 0.8; font-weight: 700; margin-top: 10px; }
         .logo-text span { color: var(--brand-primary); }
-        
         .nav-list { padding: 20px; flex: 1; overflow-y: auto; }
-        .nav-item {
-            padding: 14px 20px; margin-bottom: 8px; cursor: pointer; color: #888;
-            display: flex; align-items: center; gap: 15px; font-family: var(--font-head);
-            text-transform: uppercase; font-size: 1.4rem; transition: 0.2s; border-left: 3px solid transparent;
-        }
+        .nav-item { padding: 14px 20px; margin-bottom: 8px; cursor: pointer; color: #888; display: flex; align-items: center; gap: 15px; font-family: var(--font-head); text-transform: uppercase; font-size: 1.4rem; transition: 0.2s; border-left: 3px solid transparent; }
         .nav-item:hover { color: #fff; background: rgba(255,255,255,0.03); }
         .nav-item.active { color: var(--brand-primary); border-left-color: var(--brand-primary); background: linear-gradient(90deg, rgba(255, 59, 48, 0.1), transparent); }
-
         .main-content { flex: 1; padding: 40px; overflow-y: auto; position: relative; scroll-behavior: smooth; }
-        
-        /* Custom Scrollbar */
-        .main-content::-webkit-scrollbar { width: 8px; }
-        .main-content::-webkit-scrollbar-track { background: #000; }
-        .main-content::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
-        .main-content::-webkit-scrollbar-thumb:hover { background: var(--brand-primary); }
-
-        /* Grids & Tables */
         .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
         .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 20px; }
         .list-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 1px solid #333; padding-bottom: 15px; flex-wrap: wrap; gap: 10px; }
-
         .info-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.95rem; }
         .info-table td, .info-table th { padding: 12px 5px; border-bottom: 1px solid rgba(255,255,255,0.1); text-align: left; }
         .info-table th { color: var(--brand-primary); font-family: var(--font-head); font-size: 1.1rem; letter-spacing: 0.5px; }
-        .info-table tr:last-child td { border-bottom: none; }
 
-        /* Auth Screen */
-        #auth-screen {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 5000;
-            background: #000; display: flex; align-items: center; justify-content: center;
-            background-image: url('https://images.unsplash.com/photo-1599058945522-28d584b6f0ff?q=80&w=2069&auto=format&fit=crop');
-            background-size: cover; background-position: center;
-        }
-        .auth-overlay { position: absolute; inset: 0; background: linear-gradient(0deg, rgba(0,0,0,0.9), rgba(0,0,0,0.6)); backdrop-filter: blur(3px); }
-        .auth-box { width: 100%; max-width: 400px; padding: 40px; background: rgba(10, 10, 10, 0.95); border: 1px solid #333; position: relative; z-index: 2; box-shadow: 0 20px 50px #000; }
-
-        /* Modals & Toast */
-        #modal-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9);
-            z-index: 2000; display: none; align-items: center; justify-content: center; backdrop-filter: blur(5px);
-        }
+        /* AUTH & MODAL */
+        #auth-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 5000; background: #000; display: flex; align-items: center; justify-content: center; background-image: url('https://images.unsplash.com/photo-1599058945522-28d584b6f0ff?q=80&w=2069&auto=format&fit=crop'); background-size: cover; background-position: center; }
+        /* REMOVED BLUR */
+        .auth-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.92); }
+        .auth-box { width: 100%; max-width: 400px; padding: 40px; background: #111; border: 1px solid #333; position: relative; z-index: 2; box-shadow: 0 20px 50px #000; }
+        .auth-logo { max-width: 160px; height: auto; display: block; margin: 0 auto 15px auto; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.6)); }
+        /* REMOVED BLUR */
+        #modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 2000; display: none; align-items: center; justify-content: center; }
         #modal-content { width: 90%; max-width: 500px; background: #111; border: 1px solid #333; max-height: 90vh; overflow-y: auto; }
-        
-        #toast {
-            position: fixed; bottom: 30px; right: 30px; background: #fff; color: #000;
-            padding: 15px 30px; font-weight: bold; z-index: 9999; transform: translateY(150px); transition: 0.3s;
-            border-left: 6px solid var(--brand-primary); font-family: var(--font-head); font-size: 1.4rem;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-        }
+        #toast { position: fixed; bottom: 30px; right: 30px; background: #fff; color: #000; padding: 15px 30px; font-weight: bold; z-index: 9999; transform: translateY(150px); transition: 0.3s; border-left: 6px solid var(--brand-primary); font-family: var(--font-head); font-size: 1.4rem; box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
 
-        /* Mobile Optimization */
         .mobile-nav { display: none; }
         @media (max-width: 768px) {
             .sidebar { display: none; }
@@ -208,19 +258,27 @@
             h1 { font-size: 2rem; }
             .grid-3, .grid-2 { grid-template-columns: 1fr; }
         }
-
         .hidden { display: none !important; }
-        
-        /* Utility */
         .badge { background: #333; color: #fff; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; }
+        .badge-success { background: var(--brand-success); color: #000; }
+        .badge-danger { background: var(--brand-primary); color: #fff; }
         .roster-container { margin-top: 15px; background: #080808; padding: 15px; border: 1px solid #222; }
         .roster-item { display: flex; justify-content: space-between; border-bottom: 1px dashed #333; padding: 8px 0; color: #ccc; font-size: 0.9rem; }
+        .star-rating { display: flex; gap: 5px; font-size: 2rem; cursor: pointer; justify-content: center; margin-bottom: 15px; }
+        .star-rating i { color: #333; transition: 0.2s; }
+        .star-rating i.active { color: var(--brand-gold); text-shadow: 0 0 10px rgba(255, 215, 0, 0.4); }
+
+        /* INVOICE STYLES */
+        .invoice-box { padding: 20px; background: #fff; color: #000; font-family: 'Helvetica', sans-serif; }
+        .invoice-box h2 { color: #000; margin-bottom: 10px; }
+        .invoice-row { display: flex; justify-content: space-between; margin-bottom: 5px; font-size: 0.9rem; }
+        .invoice-total { border-top: 2px solid #000; margin-top: 15px; padding-top: 10px; font-weight: bold; font-size: 1.2rem; }
     </style>
 </head>
 <body>
 
     <div id="toast">ACTION SUCCESSFUL</div>
-
+    <input type="file" id="file-upload" accept=".csv" style="display: none;">
     <div id="modal-overlay">
         <div id="modal-content" class="card"></div>
     </div>
@@ -230,38 +288,27 @@
         <div class="auth-box">
             <div style="text-align: center; margin-bottom: 30px;">
                 <img src="https://i.postimg.cc/rshzg1Fc/4c36cbda-1c04-4ffc-a367-5ff13a88e1e2.png" alt="Smash Fit Logo" class="auth-logo">
-                
                 <div class="logo-text" style="font-size: 2.5rem;">SMASH <span>FIT</span></div>
                 <p style="color: #FF3B30; font-family: 'Teko'; font-size: 1.2rem; letter-spacing: 2px; text-transform: uppercase;">Smash Your Comfort Zone</p>
-                <p class="text-muted" style="font-size: 0.8rem; margin-top: 10px;">SARIT CENTRE • NAIROBI</p>
             </div>
             
             <form id="login-form">
-                <div class="input-group">
-                    <label>Email Address</label>
-                    <input type="email" id="login-email" required placeholder="member@smashfit.com">
-                </div>
-                <div class="input-group">
-                    <label>Password</label>
-                    <input type="password" id="login-pass" required placeholder="123">
-                </div>
+                <div class="input-group"><label>Email Address</label><input type="email" id="login-email" required placeholder="member@smashfit.com"></div>
+                <div class="input-group"><label>Password</label><input type="password" id="login-pass" required placeholder="123"></div>
                 <button type="submit" class="btn btn-primary full-width">ENTER GYM</button>
             </form>
-            <div style="margin-top: 20px; text-align: center;">
-                <p style="font-size: 0.8rem;">Demo: admin@smashfit.com | member@smashfit.com</p>
+            <div style="margin-top: 20px; text-align: center; color: #555; font-size: 0.8rem;">
+                <p>Admin: admin@smashfit.com | 123</p>
+                <p>Member: member@smashfit.com | 123</p>
+                <p>Trainer: boniface@smashfit.com | 123</p>
             </div>
         </div>
     </section>
 
     <div id="app-shell" class="app-shell hidden">
-        
         <aside class="sidebar">
-            <div class="sidebar-header">
-                <img src="https://i.postimg.cc/rshzg1Fc/4c36cbda-1c04-4ffc-a367-5ff13a88e1e2.png" alt="Smash Fit Logo" class="sidebar-logo">
-            </div>
-            
+            <div class="sidebar-header"><img src="https://i.postimg.cc/rshzg1Fc/4c36cbda-1c04-4ffc-a367-5ff13a88e1e2.png" alt="Smash Fit Logo" class="sidebar-logo"></div>
             <div id="sidebar-nav" class="nav-list"></div>
-            
             <div style="padding: 20px; border-top: 1px solid #222;">
                 <div style="display: flex; align-items: center; gap: 15px;">
                     <div style="width: 40px; height: 40px; background: var(--brand-primary); color: #fff; font-weight: bold; border-radius: 50%; display: grid; place-items: center; font-family: 'Teko'; font-size: 1.5rem;" id="user-initial">A</div>
@@ -273,64 +320,21 @@
                 </div>
             </div>
         </aside>
-
         <main class="main-content" id="main-view"></main>
-
         <nav class="mobile-nav" id="mobile-nav"></nav>
     </div>
 
     <script>
-        // --- 1. CONFIG & DATA ---
-        
-        // Smash Fit Specific Data
         const GymData = {
-            info: {
-                name: "Smash Fit Gym",
-                slogan: "Smash Your Goals",
-                address: "Sarit Centre, 6th Floor, Karuna Road, Nairobi, Kenya",
-                phone: "+254 704 227 227",
-                email: "info@smashfitgym.com",
-                mission: "To solve fundamental fitness problems with advanced knowledge, state-of-the-art equipment, and motivating experiences.",
-            },
-            hours: [
-                { day: "Weekdays (Mon - Fri)", time: "05:00 AM – 10:00 PM" },
-                { day: "Weekends & Holidays", time: "07:00 AM – 07:00 PM" }
-            ],
-            // Updated Membership Structure for Selectors
             membership: [
-                { 
-                    type: "Bronze", 
-                    css: "card-bronze", 
-                    plans: [
-                        { dur: "Monthly", price: 8500 },
-                        { dur: "Quarterly", price: 24500 },
-                        { dur: "Annual", price: 83000 }
-                    ]
-                },
-                { 
-                    type: "Silver", 
-                    css: "card-silver",
-                    plans: [
-                        { dur: "Monthly", price: 9600 },
-                        { dur: "Quarterly", price: 27500 },
-                        { dur: "Annual", price: 94000 }
-                    ]
-                },
-                { 
-                    type: "Gold", 
-                    css: "card-gold",
-                    plans: [
-                        { dur: "Monthly", price: 10700 },
-                        { dur: "Quarterly", price: 30500 },
-                        { dur: "Annual", price: 99000 }
-                    ]
-                }
+                { type: "Bronze", css: "card-bronze", plans: [{ dur: "Monthly", price: 8500, days: 30 }, { dur: "Quarterly", price: 24500, days: 90 }, { dur: "Annual", price: 83000, days: 365 }] },
+                { type: "Silver", css: "card-silver", plans: [{ dur: "Monthly", price: 9600, days: 30 }, { dur: "Quarterly", price: 27500, days: 90 }, { dur: "Annual", price: 94000, days: 365 }] },
+                { type: "Gold", css: "card-gold", plans: [{ dur: "Monthly", price: 10700, days: 30 }, { dur: "Quarterly", price: 30500, days: 90 }, { dur: "Annual", price: 99000, days: 365 }] }
             ],
-            trainers: [
-                "Boniface Ninno", "Steve Boycardio", "Ebel Odel", "Frank Murule", 
-                "Sabina Shamilar", "Sammy Kabesa", "Anthony Maina", "Billy Wanga", 
-                "Vinzenzio Tietie", "Charmaine Gow", "Eric Tabu Juma"
-            ]
+            trainers: ["Boniface Ninno", "Steve Boycardio", "Ebel Odel", "Frank Murule", "Sabina Shamilar", "Billy Wanga"],
+            shiftTypes: ["Morning (05:00 - 13:00)", "Afternoon (12:00 - 20:00)", "Evening (14:00 - 22:00)"],
+            upiId: "praneshkriss@oksbi", // UPDATED UPI ID
+            qrImage: "image_a2295a.png" // User uploaded QR
         };
 
         const Utils = {
@@ -339,102 +343,192 @@
                 const [h, m] = time24.split(':');
                 const hour = parseInt(h);
                 const ampm = hour >= 12 ? 'PM' : 'AM';
-                const hour12 = hour % 12 || 12;
-                return `${hour12}:${m} ${ampm}`;
+                return `${hour % 12 || 12}:${m} ${ampm}`;
             },
-            formatMoney: (amount) => {
-                return "KES " + parseInt(amount).toLocaleString();
-            }
+            formatMoney: (amount) => "KES " + parseInt(amount).toLocaleString(),
+            getToday: () => new Date().toLocaleDateString('en-CA'),
+            getTime: () => {
+                const now = new Date();
+                return `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+            },
+            addDays: (date, days) => {
+                let result = new Date(date);
+                result.setDate(result.getDate() + parseInt(days));
+                return result.toISOString().split('T')[0];
+            },
+            generateCalendarData: (logs, year, month) => {
+                const daysInMonth = new Date(year, month + 1, 0).getDate();
+                let firstDay = new Date(year, month, 1).getDay(); 
+                let startOffset = (firstDay === 0 ? 6 : firstDay - 1); 
+
+                const calendarCells = [];
+                for(let i=0; i<startOffset; i++) calendarCells.push({ type: 'empty' });
+                
+                // Find Max for scaling intensity
+                let maxCount = 0;
+                let totalCount = 0;
+                for(let d=1; d<=daysInMonth; d++) {
+                    const dateStr = `${year}-${String(month+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+                    const count = logs.filter(l => l.date === dateStr).length;
+                    if(count > maxCount) maxCount = count;
+                    totalCount += count;
+                }
+                
+                for(let d=1; d<=daysInMonth; d++) {
+                    const dateStr = `${year}-${String(month+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+                    const count = logs.filter(l => l.date === dateStr).length;
+                    calendarCells.push({ type: 'day', day: d, date: dateStr, count: count, max: maxCount });
+                }
+                const avg = daysInMonth > 0 ? Math.round(totalCount / daysInMonth) : 0;
+                return { cells: calendarCells, avg: avg };
+            },
+            parseCSV: (text) => {
+                const lines = text.split('\n');
+                const result = [];
+                for(let i=1; i<lines.length; i++) {
+                    const line = lines[i].trim();
+                    if(!line) continue;
+                    const cols = line.split(',');
+                    if(cols.length >= 4) {
+                        result.push({
+                            uid: cols[0] || 'imp'+Date.now()+i,
+                            name: cols[1] || 'Imported User',
+                            role: cols[2] || 'member',
+                            date: cols[3], 
+                            checkIn: cols[4] || '00:00',
+                            checkOut: cols[5] || '00:00'
+                        });
+                    }
+                }
+                return result;
+            },
+            generateInvoiceId: () => 'INV-' + Math.floor(100000 + Math.random() * 900000)
         };
 
         const DB = {
             init() {
                 if(!localStorage.getItem('gym_users_db')) {
-                    
                     const users = [
                         { id: 'admin@smashfit.com', pass: '123', name: 'System Admin', role: 'admin' },
-                        // Member with wallet and currentPlan
-                        { id: 'member@smashfit.com', pass: '123', name: 'John Doe', role: 'member', wallet: 5000, currentPlan: null, txns: [] }
+                        { id: 'member@smashfit.com', pass: '123', name: 'John Doe', role: 'member', wallet: 25000, points: 0, activePlan: null, isCheckedIn: false, txns: [{desc:'Deposit', amt: 25000, date: Utils.getToday()}] }
                     ];
-
-                    GymData.trainers.forEach(name => {
+                    GymData.trainers.forEach((name, i) => {
                         const email = name.split(' ')[0].toLowerCase() + '@smashfit.com';
-                        users.push({ id: email, pass: '123', name: name, role: 'trainer' });
+                        users.push({ id: email, pass: '123', name: name, role: 'trainer', designation: 'Trainer', basicPay: 25000 + (i*1000) });
                     });
-
+                    localStorage.setItem('gym_users_db', JSON.stringify(users));
+                }
+                if(!localStorage.getItem('gym_classes_db')) {
                     const classes = [
                         { id: 'c1', name: 'Sunrise Spin', time: '05:30', trainer: 'Boniface Ninno', price: 1500, cap: 20, booked: [] },
-                        { id: 'c2', name: 'Abs & Core', time: '06:30', trainer: 'Frank Murule', price: 1500, cap: 25, booked: [] },
-                        { id: 'c3', name: 'Power Yoga', time: '08:00', trainer: 'Charmaine Gow', price: 1500, cap: 15, booked: [] },
-                        { id: 'c4', name: 'Afro Dance', time: '17:30', trainer: 'Steve Boycardio', price: 1500, cap: 30, booked: [] },
-                        { id: 'c5', name: 'Strength & Cond.', time: '18:30', trainer: 'Eric Tabu Juma', price: 1500, cap: 20, booked: [] },
-                        { id: 'c6', name: 'Ride or Die Spin', time: '19:00', trainer: 'Billy Wanga', price: 1500, cap: 20, booked: [] }
+                        { id: 'c2', name: 'Abs & Core', time: '06:30', trainer: 'Frank Murule', price: 1500, cap: 25, booked: [] }
                     ];
-
-                    localStorage.setItem('gym_users_db', JSON.stringify(users));
                     localStorage.setItem('gym_classes_db', JSON.stringify(classes));
                 }
+                if(!localStorage.getItem('gym_attendance')) {
+                    const dummy = [];
+                    const today = new Date();
+                    const currentYear = today.getFullYear();
+                    const currentMonth = today.getMonth();
+                    const seedMonth = (y, m) => {
+                        const days = new Date(y, m + 1, 0).getDate();
+                        for(let d=1; d<=days; d++) {
+                            if(Math.random() > 0.4) {
+                                const count = Math.floor(Math.random() * 15) + 2; 
+                                for(let k=0; k<count; k++) {
+                                    dummy.push({ 
+                                        uid: 'x', name: 'Guest', role: 'member', 
+                                        date: `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`, 
+                                        checkIn: '18:00', checkOut: '19:00' 
+                                    });
+                                }
+                            }
+                        }
+                    }
+                    seedMonth(currentYear, currentMonth); 
+                    seedMonth(currentYear, currentMonth - 1); 
+                    localStorage.setItem('gym_attendance', JSON.stringify(dummy));
+                }
+                if(!localStorage.getItem('gym_feedback')) localStorage.setItem('gym_feedback', '[]');
+                if(!localStorage.getItem('gym_shifts')) localStorage.setItem('gym_shifts', '[]');
             },
             get(k) { return JSON.parse(localStorage.getItem(k) || '[]'); },
             set(k, v) { localStorage.setItem(k, JSON.stringify(v)); },
-            
             findUser(e, p) { return this.get('gym_users_db').find(u => u.id === e && u.pass === p); },
-            getTrainers() { return this.get('gym_users_db').filter(u => u.role === 'trainer'); },
-            getClass(id) { return this.get('gym_classes_db').find(c => c.id === id); },
-
-            // --- USER TRANSACTIONS ---
+            importLogs(newLogs) {
+                const current = this.get('gym_attendance');
+                this.set('gym_attendance', [...newLogs, ...current]);
+            },
             topUp(uid, amt) {
                 const users = this.get('gym_users_db');
                 const u = users.find(x => x.id === uid);
                 if(u) {
                     u.wallet = (u.wallet || 0) + parseInt(amt);
                     if(!u.txns) u.txns = [];
-                    u.txns.unshift({ desc: "Wallet Deposit", amt: amt, date: new Date().toLocaleDateString() });
+                    u.txns.unshift({ desc: "Wallet Deposit (UPI)", amt: amt, date: Utils.getToday() });
                     this.set('gym_users_db', users);
                     return true;
                 }
                 return false;
             },
-
-            subscribePlan(uid, planName, price, duration) {
+            subscribePlan(uid, planName, price, duration, days) {
                 const users = this.get('gym_users_db');
                 const u = users.find(x => x.id === uid);
-                
                 if(u.wallet < price) return { ok: false, msg: "INSUFFICIENT FUNDS" };
-                
-                // Deduct
                 u.wallet -= price;
-                // Set Plan
-                u.currentPlan = `${planName} (${duration})`;
-                // Log
+                u.points = (u.points || 0) + 100;
+                const startDate = Utils.getToday();
+                const expiryDate = Utils.addDays(startDate, days);
+                u.activePlan = { name: `${planName} (${duration})`, start: startDate, expiry: expiryDate };
                 if(!u.txns) u.txns = [];
-                u.txns.unshift({ desc: `Subscribed: ${planName} ${duration}`, amt: -price, date: new Date().toLocaleDateString() });
-                
+                u.txns.unshift({ desc: `Subscribed: ${planName}`, amt: -price, date: startDate });
                 this.set('gym_users_db', users);
-                return { ok: true, msg: "PLAN ACTIVATED" };
+                return { ok: true, msg: "MEMBERSHIP ACTIVATED" };
             },
-
             bookClass(uid, cid) {
                 const users = this.get('gym_users_db');
                 const classes = this.get('gym_classes_db');
                 const u = users.find(x => x.id === uid);
                 const c = classes.find(x => x.id === cid);
-
                 if(c.booked.includes(uid)) return { ok: false, msg: "ALREADY BOOKED" };
-                if(c.booked.length >= c.cap) return { ok: false, msg: "CLASS FULL" };
                 if(u.wallet < c.price) return { ok: false, msg: "INSUFFICIENT FUNDS" };
-
                 u.wallet -= c.price;
+                u.points = (u.points || 0) + 10; 
                 if(!u.txns) u.txns = [];
-                u.txns.unshift({ desc: c.name, amt: -c.price, date: new Date().toLocaleDateString() });
+                u.txns.unshift({ desc: c.name, amt: -c.price, date: Utils.getToday() });
                 c.booked.push(uid);
-
                 this.set('gym_users_db', users);
                 this.set('gym_classes_db', classes);
                 return { ok: true, msg: "BOOKING SUCCESSFUL" };
             },
-
-            // Admin Logic
+            toggleAttendance(uid, name, role) {
+                const logs = this.get('gym_attendance');
+                const users = this.get('gym_users_db');
+                const u = users.find(x => x.id === uid);
+                const today = Utils.getToday();
+                const now = Utils.getTime(); 
+                if (u.isCheckedIn) {
+                    const openSession = logs.find(l => l.uid === uid && l.checkOut === null);
+                    if (openSession) openSession.checkOut = now;
+                    u.isCheckedIn = false;
+                    this.set('gym_attendance', logs);
+                    this.set('gym_users_db', users);
+                    return { ok: true, msg: "CHECKED OUT. GOOD WORKOUT!" };
+                } else {
+                    logs.unshift({ uid, name, role, date: today, checkIn: now, checkOut: null });
+                    u.isCheckedIn = true;
+                    if(role === 'member') u.points = (u.points || 0) + 5;
+                    this.set('gym_attendance', logs);
+                    this.set('gym_users_db', users);
+                    return { ok: true, msg: "CHECKED IN. LET'S SMASH IT!" };
+                }
+            },
+            submitFeedback(uid, name, rating, comment) {
+                const feed = this.get('gym_feedback');
+                feed.unshift({ uid, name, rating, comment, date: Utils.getToday() });
+                this.set('gym_feedback', feed);
+                return true;
+            },
             addUser(u) {
                 const users = this.get('gym_users_db');
                 if(users.find(x => x.id === u.id)) return false;
@@ -444,11 +538,8 @@
             },
             deleteUser(uid) {
                 let users = this.get('gym_users_db');
-                let classes = this.get('gym_classes_db');
                 users = users.filter(u => u.id !== uid);
-                classes.forEach(c => c.booked = c.booked.filter(b => b !== uid));
                 this.set('gym_users_db', users);
-                this.set('gym_classes_db', classes);
                 return true;
             },
             addClass(c) {
@@ -456,26 +547,25 @@
                 classes.push(c);
                 this.set('gym_classes_db', classes);
             },
-            editClass(cid, data) {
-                let classes = this.get('gym_classes_db');
-                let idx = classes.findIndex(c => c.id === cid);
-                if(idx !== -1) {
-                    classes[idx] = { ...classes[idx], ...data };
-                    this.set('gym_classes_db', classes);
-                    return true;
-                }
-                return false;
-            },
             deleteClass(cid) {
                 let classes = this.get('gym_classes_db');
                 classes = classes.filter(c => c.id !== cid);
                 this.set('gym_classes_db', classes);
+            },
+            assignShift(shiftData) {
+                const shifts = this.get('gym_shifts');
+                shifts.push(shiftData);
+                this.set('gym_shifts', shifts);
+            },
+            deleteShift(sid) {
+                let shifts = this.get('gym_shifts');
+                shifts = shifts.filter(s => s.id !== sid);
+                this.set('gym_shifts', shifts);
             }
         };
 
-        // --- 2. APPLICATION CONTROLLER ---
         const App = {
-            user: null,
+            user: null, viewDate: new Date(),
 
             init() {
                 DB.init();
@@ -483,18 +573,29 @@
                     e.preventDefault();
                     const u = DB.findUser(document.getElementById('login-email').value, document.getElementById('login-pass').value);
                     if(u) { this.user = u; this.launch(); } 
-                    else { alert('INVALID LOGIN. Try member@smashfit.com / 123'); }
+                    else { alert('INVALID LOGIN. Try demo accounts.'); }
+                });
+                document.getElementById('file-upload').addEventListener('change', (e) => {
+                    const file = e.target.files[0];
+                    if(!file) return;
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                        const csvData = event.target.result;
+                        const parsed = Utils.parseCSV(csvData);
+                        DB.importLogs(parsed);
+                        App.toast(`IMPORTED ${parsed.length} RECORDS`);
+                        if(document.querySelector('#nav-dashboard.active')) App.renderHeatmap(); 
+                    };
+                    reader.readAsText(file);
                 });
             },
 
             launch() {
                 document.getElementById('auth-screen').style.display = 'none';
                 document.getElementById('app-shell').classList.remove('hidden');
-                
                 document.getElementById('user-name').innerText = this.user.name;
                 document.getElementById('user-role').innerText = this.user.role.toUpperCase();
                 document.getElementById('user-initial').innerText = this.user.name.charAt(0);
-
                 this.renderNav();
                 this.navigate('dashboard');
             },
@@ -504,388 +605,256 @@
                 const dNav = document.getElementById('sidebar-nav');
                 const mNav = document.getElementById('mobile-nav');
                 dNav.innerHTML = ''; mNav.innerHTML = '';
-
                 let routes = [];
-                if(role === 'admin') routes = [
-                    { id: 'dashboard', label: 'Admin', icon: 'dashboard' },
-                    { id: 'users', label: 'Members', icon: 'groups' },
-                    { id: 'classes', label: 'Schedule', icon: 'fitness_center' }
-                ];
-                if(role === 'member') routes = [
-                    { id: 'dashboard', label: 'Home', icon: 'home' },
-                    { id: 'classes', label: 'Book', icon: 'calendar_today' },
-                    { id: 'wallet', label: 'Wallet', icon: 'account_balance_wallet' }
-                ];
-                if(role === 'trainer') routes = [{ id: 'dashboard', label: 'Roster', icon: 'assignment' }];
-
+                if(role === 'admin') {
+                    routes = [{ id: 'dashboard', label: 'Overview', icon: 'dashboard' }, { id: 'users', label: 'Members', icon: 'groups' }, { id: 'classes', label: 'Schedule', icon: 'fitness_center' }, { id: 'attendance', label: 'Attendance', icon: 'verified_user' }, { id: 'shifts', label: 'Shifts', icon: 'schedule' }, { id: 'payroll', label: 'Payroll', icon: 'payments' }, { id: 'feedback', label: 'Feedback', icon: 'reviews' }];
+                } else if(role === 'member') {
+                    routes = [{ id: 'dashboard', label: 'Home', icon: 'home' }, { id: 'classes', label: 'Book', icon: 'calendar_today' }, { id: 'wallet', label: 'Wallet', icon: 'account_balance_wallet' }, { id: 'feedback', label: 'Feedback', icon: 'thumb_up' }];
+                } else if(role === 'trainer') {
+                    routes = [{ id: 'dashboard', label: 'Roster', icon: 'assignment' }, { id: 'shifts', label: 'Shifts', icon: 'schedule' }, { id: 'payroll', label: 'Payslip', icon: 'receipt' }];
+                }
                 routes.forEach(r => {
                     dNav.innerHTML += `<div class="nav-item" id="nav-${r.id}" onclick="App.navigate('${r.id}')"><i class="material-icons-round">${r.icon}</i> ${r.label}</div>`;
                     mNav.innerHTML += `<button class="nav-btn" onclick="App.navigate('${r.id}')"><i class="material-icons-round">${r.icon}</i>${r.label}</button>`;
                 });
+                mNav.innerHTML += `<button class="nav-btn" style="color:var(--brand-primary);" onclick="location.reload()"><i class="material-icons-round">logout</i></button>`;
+            },
 
-                // MOBILE FIX: Add Logout Button to Bottom Nav
-                mNav.innerHTML += `<button class="nav-btn" style="color:var(--brand-primary);" onclick="location.reload()"><i class="material-icons-round">logout</i>Logout</button>`;
+            changeMonth(offset) { this.viewDate.setMonth(this.viewDate.getMonth() + offset); this.renderHeatmap(); },
+            
+            renderHeatmap() {
+                const year = this.viewDate.getFullYear();
+                const month = this.viewDate.getMonth();
+                const monthNames = ["JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"];
+                document.getElementById('hm-month').innerText = `${monthNames[month]} ${year}`;
+                const data = Utils.generateCalendarData(DB.get('gym_attendance'), year, month);
+                
+                // Ring Stats
+                const avgPct = Math.min(100, data.avg * 5); 
+                document.getElementById('hm-stat-ring').style.setProperty('--p', `${avgPct}%`);
+                document.getElementById('hm-avg').innerText = data.avg;
+
+                let html = `<div class="hm-day-head">M</div><div class="hm-day-head">T</div><div class="hm-day-head">W</div><div class="hm-day-head">T</div><div class="hm-day-head">F</div><div class="hm-day-head">S</div><div class="hm-day-head">S</div>`;
+                data.cells.forEach(c => {
+                    if(c.type === 'empty') html += `<div></div>`;
+                    else {
+                        const pct = c.max > 0 ? (c.count / c.max) * 100 : 0;
+                        let cls = 'iso-0';
+                        if(pct > 0) cls = 'iso-1'; // Light Red (Low)
+                        if(pct > 30) cls = 'iso-2';
+                        if(pct > 60) cls = 'iso-3';
+                        if(pct > 85) cls = 'iso-4'; // Dark Red (High)
+                        html += `<div class="iso-cell ${cls}" data-info="${c.date}: ${c.count} Active"><div class="iso-core">${c.day}</div></div>`;
+                    }
+                });
+                document.getElementById('hm-grid').innerHTML = html;
             },
 
             navigate(viewId) {
                 const container = document.getElementById('main-view');
                 document.querySelectorAll('.nav-item').forEach(e => e.classList.remove('active'));
-                document.querySelectorAll('.nav-btn').forEach(e => e.classList.remove('active'));
-                
                 const nav = document.getElementById(`nav-${viewId}`);
                 if(nav) nav.classList.add('active');
-
-                // Mobile active state
-                const navBtns = document.querySelectorAll('.nav-btn');
-                navBtns.forEach(btn => {
-                   if(btn.innerText.includes(viewId.toUpperCase()) || (viewId==='dashboard' && btn.innerText.includes('HOME'))) btn.classList.add('active'); 
-                });
-
                 const users = DB.get('gym_users_db');
                 const classes = DB.get('gym_classes_db');
+                const attendance = DB.get('gym_attendance');
+                const shifts = DB.get('gym_shifts');
 
-                // --- VIEW: ADMIN DASHBOARD ---
-                if(this.user.role === 'admin' && viewId === 'dashboard') {
-                    const members = users.filter(u => u.role === 'member').length;
-                    const cash = users.reduce((acc, u) => acc + (u.wallet || 0), 0);
-                    container.innerHTML = `
-                        <div class="list-header"><h2>MANAGEMENT OVERVIEW</h2></div>
-                        <div class="grid-3">
-                            <div class="card">
-                                <h3 class="text-muted">TOTAL MEMBERS</h3>
-                                <h1 class="text-brand font-num" style="font-size:3.5rem">${members}</h1>
+                if(this.user.role === 'admin') {
+                    if(viewId === 'dashboard') {
+                        const today = Utils.getToday();
+                        const present = attendance.filter(a => a.date === today && a.checkOut === null).length; 
+                        const revenue = users.reduce((acc, u) => acc + (u.wallet || 0), 0);
+                        container.innerHTML = `
+                            <div class="list-header"><h2>DASHBOARD</h2></div>
+                            <div class="grid-3">
+                                <div class="card"><h3 class="text-muted">TOTAL MEMBERS</h3><h1 class="text-brand font-num" style="font-size:3.5rem">${users.filter(u=>u.role==='member').length}</h1></div>
+                                <div class="card"><h3 class="text-muted">ACTIVE NOW</h3><h1 class="text-white font-num" style="font-size:3.5rem">${present}</h1><div class="badge badge-success" style="width:fit-content">LIVE</div></div>
+                                <div class="card"><h3 class="text-muted">SYSTEM CASH</h3><h1 class="text-success font-num" style="font-size:3.5rem">${Utils.formatMoney(revenue)}</h1></div>
                             </div>
-                            <div class="card">
-                                <h3 class="text-muted">SYSTEM CASH FLOW</h3>
-                                <h1 class="font-num" style="font-size:3.5rem">${Utils.formatMoney(cash)}</h1>
-                            </div>
-                            <div class="card">
-                                <h3 class="text-muted">ACTIVE CLASSES</h3>
-                                <h1 class="font-num" style="font-size:3.5rem">${classes.length}</h1>
-                            </div>
-                        </div>`;
-                }
-
-                // --- VIEW: ADMIN USERS ---
-                else if(this.user.role === 'admin' && viewId === 'users') {
-                    container.innerHTML = `
-                        <div class="list-header"><h2>USER DATABASE</h2><button class="btn btn-primary" onclick="App.modalAddUser()">+ ADD USER</button></div>
-                        <div class="grid-3">
-                            ${users.map(u => `
-                                <div class="card">
-                                    <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
-                                        <span class="text-brand font-num" style="font-size:1.2rem;">${u.role.toUpperCase()}</span>
-                                        <button class="btn-ghost" style="color:var(--brand-primary); border:none;" onclick="App.actionDeleteUser('${u.id}')"><i class="material-icons-round">delete</i></button>
-                                    </div>
-                                    <h3>${u.name}</h3>
-                                    <p class="text-muted" style="margin-bottom:15px;">${u.id}</p>
-                                    ${u.role === 'member' ? `<div style="margin-bottom:10px; font-weight:bold;">Bal: ${Utils.formatMoney(u.wallet||0)}</div><button class="btn btn-ghost full-width" onclick="App.actionTopUp('${u.id}')">TOP UP WALLET</button>` : ''}
-                                </div>
-                            `).join('')}
-                        </div>`;
-                }
-
-                // --- VIEW: ADMIN CLASSES ---
-                else if(this.user.role === 'admin' && viewId === 'classes') {
-                    container.innerHTML = `
-                        <div class="list-header"><h2>CLASS SCHEDULE</h2><button class="btn btn-primary" onclick="App.modalAddClass()">+ SCHEDULE</button></div>
-                        <div class="grid-3">
-                            ${classes.map(c => `
-                                <div class="card">
-                                    <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
-                                        <span class="badge">${Utils.formatTime12(c.time)}</span>
-                                        <span class="text-brand font-num" style="font-size:1.2rem;">${Utils.formatMoney(c.price)}</span>
-                                    </div>
-                                    <h3 style="font-size:1.5rem;">${c.name}</h3>
-                                    <p class="text-muted">COACH: ${c.trainer}</p>
-                                    <p class="text-muted" style="margin-bottom:20px;">CAPACITY: ${c.booked.length} / ${c.cap}</p>
-                                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-                                        <button class="btn btn-ghost" onclick="App.modalEditClass('${c.id}')">EDIT</button>
-                                        <button class="btn btn-danger" onclick="App.actionDeleteClass('${c.id}')">DELETE</button>
+                            <div class="heatmap-ui" style="margin-top:20px;">
+                                <div class="hm-header">
+                                    <div class="hm-title-group"><span>ACTIVITY TRACKER</span><h2 id="hm-month">...</h2></div>
+                                    <div class="hm-controls">
+                                        <div class="hm-stat-ring" id="hm-stat-ring"><div class="hm-stat-num" id="hm-avg">0</div></div>
+                                        <button class="btn-icon-only" onclick="App.changeMonth(-1)"><i class="material-icons-round">chevron_left</i></button>
+                                        <button class="btn-icon-only" onclick="App.changeMonth(1)"><i class="material-icons-round">chevron_right</i></button>
+                                        <button class="btn btn-primary" onclick="document.getElementById('file-upload').click()">IMPORT CSV</button>
                                     </div>
                                 </div>
-                            `).join('')}
-                        </div>`;
-                }
-
-                // --- VIEW: MEMBER HOME ---
-                else if(this.user.role === 'member' && viewId === 'dashboard') {
-                    this.user = users.find(u => u.id === this.user.id); // Refresh data
-                    container.innerHTML = `
-                        <div class="grid-2">
-                            <div class="card" style="border-left: 5px solid var(--brand-primary); background: linear-gradient(135deg, #101010 0%, #1f0505 100%);">
-                                <div style="display:flex; justify-content:space-between; align-items:start;">
-                                    <div>
-                                        <h3 class="text-muted">WALLET BALANCE</h3>
-                                        <h1 class="text-white font-num" style="font-size: 3.5rem; line-height:1; margin: 10px 0;">${Utils.formatMoney(this.user.wallet)}</h1>
-                                    </div>
-                                    <button onclick="App.memberTopUp()" class="btn btn-primary" style="font-size:1rem; padding:8px 16px;">+ ADD FUNDS</button>
-                                </div>
-                                <p class="text-muted">Available for Plans & Classes</p>
+                                <div id="hm-grid" class="hm-grid"></div>
                             </div>
-                            
-                            <div class="card" style="display:flex; flex-direction:column; justify-content:center;">
-                                <h3 class="text-muted">CURRENT STATUS</h3>
-                                ${this.user.currentPlan ? 
-                                    `<h1 class="text-brand font-num" style="font-size:2.5rem; margin-top:10px;">${this.user.currentPlan}</h1><div class="badge" style="background:#28a745; width:fit-content; margin-top:5px;">ACTIVE</div>` : 
-                                    `<h1 class="text-white font-num" style="font-size:2rem; margin-top:10px;">NO ACTIVE PLAN</h1><p class="text-muted">Select a plan below to start.</p>`
-                                }
-                            </div>
-                        </div>
-
-                        <div style="margin-top: 40px;">
-                             <h2 class="text-white" style="margin-bottom: 20px; font-size:2rem;">CHOOSE YOUR PLAN</h2>
-                             <div class="grid-3">
-                                ${GymData.membership.map(m => `
-                                    <div class="card ${m.css}">
-                                        <h2 style="font-size:2.2rem; margin-bottom:15px; border-bottom:1px solid rgba(255,255,255,0.2); padding-bottom:10px;">${m.type}</h2>
-                                        
-                                        <div style="margin-bottom:15px;">
-                                            <label style="font-size:0.8rem; font-weight:bold; color: inherit; opacity:0.8;">SELECT DURATION:</label>
-                                            <select id="sel-${m.type}" style="background:rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.2); color:inherit; font-weight:bold;">
-                                                ${m.plans.map(p => `<option value="${p.price}|${p.dur}">${p.dur} - ${Utils.formatMoney(p.price)}</option>`).join('')}
-                                            </select>
-                                        </div>
-
-                                        <ul style="list-style:none; padding:0; margin-bottom:20px; font-size:0.9rem; line-height:1.6; opacity:0.9;">
-                                            <li><i class="material-icons-round" style="font-size:14px;">check</i> Gym Floor Access</li>
-                                            <li><i class="material-icons-round" style="font-size:14px;">check</i> Locker Access</li>
-                                            ${m.type === 'Gold' ? '<li><i class="material-icons-round" style="font-size:14px;">star</i> Sauna & Steam</li>' : ''}
-                                        </ul>
-
-                                        <button class="btn full-width" style="background:rgba(0,0,0,0.5); border:1px solid rgba(255,255,255,0.5); color:inherit;" 
-                                            onmouseover="this.style.background='rgba(255,255,255,0.2)'" 
-                                            onmouseout="this.style.background='rgba(0,0,0,0.5)'"
-                                            onclick="App.memberSubscribe('${m.type}')">
-                                            SUBSCRIBE NOW
-                                        </button>
-                                    </div>
-                                `).join('')}
-                             </div>
-                        </div>
-
-                        <div class="card" style="margin-top:20px;">
-                            <h3><i class="material-icons-round" style="vertical-align:middle; color:var(--brand-primary)">info</i> MISSION STATEMENT</h3>
-                            <p class="text-white" style="margin-top:10px; font-style: italic;">"${GymData.info.mission}"</p>
-                        </div>
-                    `;
+                        `;
+                        this.renderHeatmap();
+                    }
+                    else if(viewId === 'users') {
+                        container.innerHTML = `<div class="list-header"><h2>USER MANAGEMENT</h2><button class="btn btn-primary" onclick="App.modalAddUser()">+ ADD USER</button></div><div class="grid-3">${users.map(u => {let activeStatus = ""; if(u.role === 'member') {if(u.activePlan && new Date(u.activePlan.expiry) >= new Date()) {activeStatus = `<div class="badge badge-success">ACTIVE: ${u.activePlan.expiry}</div>`;} else {activeStatus = `<div class="badge badge-danger">NO ACTIVE PLAN</div>`;}}return `<div class="card"><div style="display:flex; justify-content:space-between; margin-bottom:10px;"><span class="text-brand font-num" style="font-size:1.2rem;">${u.role.toUpperCase()}</span><button class="btn-ghost" style="color:var(--brand-primary); border:none;" onclick="App.actionDeleteUser('${u.id}')"><i class="material-icons-round">delete</i></button></div><h3>${u.name}</h3><p class="text-muted" style="margin-bottom:10px;">${u.id}</p>${activeStatus}${u.role === 'member' ? `<div style="margin:10px 0;">Bal: ${Utils.formatMoney(u.wallet||0)}</div><button class="btn btn-ghost full-width" onclick="App.actionTopUp('${u.id}')">TOP UP</button>` : ''}</div>`}).join('')}</div>`;
+                    }
+                    else if(viewId === 'attendance') {
+                        container.innerHTML = `<div class="list-header"><h2>ATTENDANCE LOGS</h2></div><div class="card"><table class="info-table"><thead><tr><th>Name</th><th>Role</th><th>Date</th><th>In</th><th>Out</th><th>Status</th></tr></thead><tbody>${attendance.length ? attendance.map(a => `<tr><td>${a.name}</td><td>${a.role.toUpperCase()}</td><td>${a.date}</td><td>${Utils.formatTime12(a.checkIn)}</td><td>${a.checkOut ? Utils.formatTime12(a.checkOut) : '--'}</td><td>${a.checkOut ? '<span class="text-muted">COMPLETED</span>' : '<span class="text-success" style="font-weight:bold; animation:pulse-red 2s infinite;">ACTIVE NOW</span>'}</td></tr>`).join('') : '<tr><td colspan="6">No records.</td></tr>'}</tbody></table></div>`;
+                    }
+                    else if(viewId === 'classes') {
+                        container.innerHTML = `<div class="list-header"><h2>CLASS SCHEDULE</h2><button class="btn btn-primary" onclick="App.modalAddClass()">+ CLASS</button></div><div class="grid-3">${classes.map(c => `<div class="card"><span class="badge">${Utils.formatTime12(c.time)}</span><h3 style="margin-top:10px;">${c.name}</h3><p class="text-muted">Trainer: ${c.trainer}</p><p class="text-muted">Booked: ${c.booked.length}/${c.cap}</p><button class="btn btn-danger full-width" style="margin-top:10px;" onclick="App.actionDeleteClass('${c.id}')">CANCEL CLASS</button></div>`).join('')}</div>`;
+                    }
+                    else if(viewId === 'shifts') {
+                        container.innerHTML = `<div class="list-header"><h2>SHIFT MANAGEMENT</h2><button class="btn btn-primary" onclick="App.modalAddShift()">+ ASSIGN SHIFT</button></div><div class="grid-3">${shifts.map(s => `<div class="card"><h3>${s.name}</h3><p class="text-brand font-num">${s.day}</p><p class="text-muted">${s.shift}</p><button class="btn btn-ghost" style="margin-top:10px;" onclick="App.actionDeleteShift('${s.id}')">REMOVE</button></div>`).join('')}</div>`;
+                    }
+                    else if(viewId === 'payroll') {
+                        container.innerHTML = `<div class="list-header"><h2>PAYROLL</h2><button class="btn btn-ghost" onclick="alert('Zoho Books CSV Exported!')">SYNC ZOHO</button></div><div class="card"><table class="info-table"><thead><tr><th>Employee</th><th>Base</th><th>Bonus</th><th>Net</th></tr></thead><tbody>${users.filter(u => u.role === 'trainer').map(u => {const daysPresent = attendance.filter(a => a.uid === u.id).length; const bonus = daysPresent * 1000; return `<tr><td>${u.name}</td><td>${Utils.formatMoney(u.basicPay||0)}</td><td>${Utils.formatMoney(bonus)}</td><td class="text-success font-num">${Utils.formatMoney((u.basicPay||0)+bonus)}</td></tr>`;}).join('')}</tbody></table></div>`;
+                    }
+                    else if(viewId === 'feedback') {
+                         // ADMIN VIEW: List Feedback
+                         const feedbacks = DB.get('gym_feedback');
+                         container.innerHTML = `<div class="list-header"><h2>MEMBER FEEDBACK</h2></div><div class="grid-3">${feedbacks.length ? feedbacks.map(f => `<div class="card"><div style="display:flex; justify-content:space-between;"><h4>${f.name}</h4><span class="text-brand">${f.rating}/5</span></div><p class="text-muted" style="margin-top:10px;">"${f.comment}"</p><p style="font-size:0.8rem; color:#555;">${f.date}</p></div>`).join('') : '<p>No feedback received yet.</p>'}</div>`;
+                    }
                 }
-
-                // --- VIEW: MEMBER CLASSES ---
-                else if(this.user.role === 'member' && viewId === 'classes') {
-                    container.innerHTML = `
-                        <div class="list-header"><h2>BOOK A CLASS</h2></div>
-                        <div class="grid-3">
-                            ${classes.map(c => {
-                                const isBooked = c.booked.includes(this.user.id);
-                                return `
-                                <div class="card">
-                                    <div style="display:flex; justify-content:space-between;">
-                                        <span class="badge">${Utils.formatTime12(c.time)}</span>
-                                        <span class="font-num text-brand" style="font-size:1.2rem;">${Utils.formatMoney(c.price)}</span>
-                                    </div>
-                                    <h3 style="margin:10px 0; font-size:1.4rem;">${c.name}</h3>
-                                    <p class="text-muted" style="margin-bottom:15px;">Coach: <span class="text-white">${c.trainer}</span></p>
-                                    <button class="btn ${isBooked ? 'btn-ghost' : 'btn-primary'} full-width" onclick="App.actionBook('${c.id}')" ${isBooked?'disabled':''}>
-                                        ${isBooked ? 'BOOKED' : 'BOOK SPOT'}
-                                    </button>
-                                </div>`;
-                            }).join('')}
-                        </div>
-                        <div class="card" style="margin-top:20px;">
-                            <h3>OTHER SERVICES</h3>
-                            <p class="text-white">Day Pass: <strong>KES 1,500</strong> | Personal Training: <strong>KES 2,000</strong> | Couples PT: <strong>KES 3,000</strong></p>
-                        </div>
-                    `;
-                }
-
-                // --- VIEW: MEMBER WALLET ---
-                else if(this.user.role === 'member' && viewId === 'wallet') {
+                else if(this.user.role === 'member') {
                     this.user = users.find(u => u.id === this.user.id);
-                    container.innerHTML = `
-                        <div class="list-header"><h2>TRANSACTION HISTORY</h2></div>
-                        <div class="card">
-                            ${(this.user.txns && this.user.txns.length > 0) ? this.user.txns.map(t => `
-                                <div style="display:flex; justify-content:space-between; border-bottom:1px solid #222; padding:15px 0;">
-                                    <div>
-                                        <div style="font-weight:bold; color:#fff; font-size:1.1rem;">${t.desc}</div>
-                                        <div class="text-muted" style="font-size:0.8rem;">${t.date}</div>
-                                    </div>
-                                    <div class="font-num ${parseInt(t.amt)<0 ? 'text-brand' : 'text-success'}" style="font-size:1.2rem;">
-                                        ${parseInt(t.amt) > 0 ? '+' : ''} ${t.amt}
-                                    </div>
-                                </div>`).join('') : '<p class="text-muted">No transactions yet.</p>'}
-                        </div>`;
+                    if(viewId === 'dashboard') {
+                        const hasPlan = this.user.activePlan && new Date(this.user.activePlan.expiry) >= new Date();
+                        // UPDATED: Check In Button is now Neon Green (btn-checkin)
+                        container.innerHTML = `<div class="grid-2"><div class="card" style="border-left: 5px solid var(--brand-primary); background: linear-gradient(135deg, #101010 0%, #1f0505 100%);"><h3 class="text-muted">WALLET</h3><h1 class="text-white font-num" style="font-size: 3.5rem; line-height:1; margin: 10px 0;">${Utils.formatMoney(this.user.wallet)}</h1><button onclick="App.memberTopUp()" class="btn btn-primary">+ ADD FUNDS</button></div><div class="card" style="display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;"><h3 class="text-muted">ACCESS CONTROL</h3><button class="btn ${this.user.isCheckedIn ? 'btn-checkout' : 'btn-checkin'}" style="margin-top:15px; width:200px; height:80px; font-size:1.5rem; border-radius:10px;" onclick="App.toggleAttendance()"><i class="material-icons-round" style="margin-right:10px;">${this.user.isCheckedIn ? 'logout' : 'login'}</i>${this.user.isCheckedIn ? 'CHECK OUT' : 'CHECK IN'}</button><p class="text-muted" style="margin-top:10px;">${this.user.isCheckedIn ? 'You are currently inside.' : 'Scan to enter.'}</p></div></div><div style="margin-top: 40px;">${hasPlan ? `<div class="card" style="border: 1px solid var(--brand-success);"><h2 class="text-success">ACTIVE MEMBERSHIP: ${this.user.activePlan.name}</h2><p class="text-white" style="font-size:1.2rem; margin-top:10px;">Expires: ${this.user.activePlan.expiry}</p></div>` : `<h2 class="text-white" style="margin-bottom: 20px; font-size:2rem;">CHOOSE MEMBERSHIP</h2><div class="grid-3">${GymData.membership.map(m => `<div class="card ${m.css} card-plan"><h2>${m.type}</h2><select id="sel-${m.type}" style="margin:20px 0;">${m.plans.map(p => `<option value="${p.price}|${p.dur}|${p.days}">${p.dur} - ${Utils.formatMoney(p.price)}</option>`).join('')}</select><button class="btn btn-primary full-width" onclick="App.memberSubscribe('${m.type}')">SUBSCRIBE</button></div>`).join('')}</div>`}</div>`;
+                    }
+                    else if(viewId === 'classes') {
+                         container.innerHTML = `<div class="list-header"><h2>BOOK CLASSES</h2></div><div class="grid-3">${classes.map(c=>{const b=c.booked.includes(this.user.id);return`<div class="card"><span class="badge">${Utils.formatTime12(c.time)}</span><h3 style="margin:10px 0;">${c.name}</h3><p class="text-muted">Cost: ${Utils.formatMoney(c.price)}</p><button class="btn ${b?'btn-ghost':'btn-primary'} full-width" onclick="App.actionBook('${c.id}')" ${b?'disabled':''}>${b?'BOOKED':'BOOK SPOT'}</button></div>`}).join('')}</div>`;
+                    }
+                    else if(viewId === 'wallet') {
+                        container.innerHTML = `<div class="list-header"><h2>TRANSACTIONS</h2></div><div class="card">${(this.user.txns&&this.user.txns.length>0)?this.user.txns.map(t=>`<div style="display:flex; justify-content:space-between; border-bottom:1px solid #222; padding:15px 0;"><div><div style="font-weight:bold;">${t.desc}</div><div class="text-muted text-small">${t.date}</div></div><div class="font-num ${parseInt(t.amt)<0?'text-brand':'text-success'}">${parseInt(t.amt)>0?'+':''} ${t.amt}</div></div>`).join(''):'<p>No transactions yet.</p>'}</div>`;
+                    }
+                    else if(viewId === 'feedback') {
+                         // MEMBER VIEW: Give Feedback
+                         container.innerHTML = `<div class="list-header"><h2>GIVE FEEDBACK</h2></div><div class="card" style="max-width:500px;"><div class="input-group"><label>Rate Experience</label><div class="star-rating" id="star-input"><i class="material-icons-round active" onclick="App.setRating(1)">star</i><i class="material-icons-round active" onclick="App.setRating(2)">star</i><i class="material-icons-round active" onclick="App.setRating(3)">star</i><i class="material-icons-round active" onclick="App.setRating(4)">star</i><i class="material-icons-round active" onclick="App.setRating(5)">star</i></div></div><div class="input-group"><label>Comment</label><textarea id="fb-msg" rows="3"></textarea></div><button class="btn btn-primary full-width" onclick="App.sendFeedback()">SUBMIT</button></div>`;
+                    }
                 }
-
-                // --- VIEW: TRAINER ROSTER ---
                 else if(this.user.role === 'trainer') {
-                    const myClasses = classes.filter(c => c.trainer === this.user.name);
-                    container.innerHTML = `
-                        <div class="list-header"><h2>COACH PORTAL: ${this.user.name}</h2></div>
-                        <div class="grid-3">
-                            ${myClasses.length === 0 ? '<p class="text-muted">No classes assigned today.</p>' : ''}
-                            ${myClasses.map(c => {
-                                const names = c.booked.map(uid => {
-                                    const u = users.find(x => x.id === uid);
-                                    return u ? u.name : 'Unknown';
-                                });
-                                return `
-                                <div class="card">
-                                    <div style="display:flex; justify-content:space-between;">
-                                        <span class="badge" style="font-size:1rem;">${Utils.formatTime12(c.time)}</span>
-                                        <span class="font-num text-brand">${c.booked.length} / ${c.cap}</span>
-                                    </div>
-                                    <h3 style="margin:10px 0;">${c.name}</h3>
-                                    <div class="roster-container">
-                                        <h4 class="text-muted" style="font-size:0.8rem; margin-bottom:5px;">ATHLETE ROSTER:</h4>
-                                        ${names.length > 0 ? names.map(n => `<div class="roster-item"><span>${n}</span><i class="material-icons-round" style="font-size:1rem; color:#4CD964">check_circle</i></div>`).join('') : '<div class="text-muted" style="padding:10px 0;">No bookings yet.</div>'}
-                                    </div>
-                                </div>`;
-                            }).join('')}
-                        </div>`;
-                }
-            },
-
-            // --- USER ACTIONS ---
-            
-            // 1. Quick Top Up Logic
-            memberTopUp() {
-                const amt = prompt("ENTER AMOUNT TO TOP UP (KES):");
-                if(amt && !isNaN(amt) && amt > 0) {
-                    DB.topUp(this.user.id, amt);
-                    this.toast("FUNDS ADDED TO WALLET");
-                    this.navigate('dashboard'); // Refresh Dashboard
-                } else {
-                    alert("Invalid Amount");
-                }
-            },
-
-            // 2. Subscription Logic
-            memberSubscribe(planType) {
-                // Get the dropdown element
-                const select = document.getElementById(`sel-${planType}`);
-                const val = select.value.split('|'); // e.g. "8500|Monthly"
-                const price = parseInt(val[0]);
-                const dur = val[1];
-
-                if(confirm(`Confirm Subscription: ${planType} Membership (${dur}) for KES ${price}?`)) {
-                    const res = DB.subscribePlan(this.user.id, planType, price, dur);
-                    if(res.ok) {
-                        this.toast("MEMBERSHIP ACTIVATED! WELCOME TO THE CLUB.");
-                        this.navigate('dashboard');
-                    } else {
-                        // Not enough funds? Ask to top up.
-                        if(confirm("Insufficient Funds in Wallet. Would you like to Top Up now?")) {
-                            this.memberTopUp();
-                        }
+                    if(viewId === 'dashboard') {
+                        this.user = users.find(u => u.id === this.user.id);
+                        const myClasses = classes.filter(c => c.trainer === this.user.name);
+                        container.innerHTML = `<div class="list-header"><h2>DASHBOARD</h2><button class="btn ${this.user.isCheckedIn ? 'btn-checkout' : 'btn-checkin'}" onclick="App.toggleAttendance()">${this.user.isCheckedIn ? 'CLOCK OUT' : 'CLOCK IN'}</button></div><div class="grid-3">${myClasses.map(c => `<div class="card"><span class="badge">${Utils.formatTime12(c.time)}</span><h3>${c.name}</h3><div class="roster-container"><h4 class="text-muted">ATHLETES (${c.booked.length})</h4>${c.booked.map(bid => `<div class="roster-item"><span>${users.find(u=>u.id===bid)?.name}</span><i class="material-icons-round text-success" style="font-size:1rem;">check_circle</i></div>`).join('')}</div></div>`).join('')}</div>`;
+                    }
+                    else if(viewId === 'shifts') {
+                        const myShifts = shifts.filter(s => s.staffId === this.user.id);
+                        container.innerHTML = `<div class="list-header"><h2>MY SHIFTS</h2></div><div class="grid-3">${myShifts.map(s=>`<div class="card"><h3>${s.day}</h3><p class="text-brand">${s.shift}</p></div>`).join('')}</div>`;
+                    }
+                    else if(viewId === 'payroll') {
+                        const daysPresent = attendance.filter(a => a.uid === this.user.id).length;
+                        const bonus = daysPresent * 1000;
+                        container.innerHTML = `<div class="list-header"><h2>PAYSLIP</h2></div><div class="card"><div class="input-group"><label>Basic Pay</label><div class="text-white font-num" style="font-size:1.5rem;">${Utils.formatMoney(this.user.basicPay)}</div></div><div class="input-group"><label>Attendance Bonus</label><div class="text-success font-num" style="font-size:1.5rem;">+ ${Utils.formatMoney(bonus)}</div></div><hr style="border-color:#333; margin:15px 0;"><div class="input-group"><label>Estimated Net</label><div class="text-white font-num" style="font-size:2.5rem;">${Utils.formatMoney(this.user.basicPay + bonus)}</div></div></div>`;
                     }
                 }
             },
+            
+            // --- UPI & PAYMENT LOGIC (DEEP LINKING & INVOICING) ---
+            memberTopUp() { 
+                const amt = prompt("Enter Amount (KES):"); 
+                if(amt && !isNaN(amt)) { 
+                    // DEEP LINK CONSTRUCTION
+                    // pn = Payee Name, pa = UPI ID, am = Amount, cu = Currency
+                    const upiLink = `upi://pay?pa=${GymData.upiId}&pn=SmashFit&am=${amt}&cu=INR`;
+                    
+                    document.getElementById('modal-content').innerHTML = `
+                        <div style="padding:30px; text-align:center; background:#fff;">
+                            <h3 style="color:#000; margin-bottom:5px;">PAYMENT GATEWAY</h3>
+                            <p style="color:#666;">Amount to Pay: <b style="color:#000;">KES ${amt}</b></p>
+                            
+                            <div style="background:#fff; padding:10px; display:inline-block; border:1px solid #ccc; border-radius:8px; margin:15px 0;">
+                                <img src="${GymData.qrImage}" style="max-width:180px; height:auto;" alt="UPI QR">
+                            </div>
+                            
+                            <p style="color:#333; font-size:0.9rem; margin-bottom:10px;">Scan QR or Select App</p>
 
-            // 3. Class Booking Logic
-            actionBook(cid) {
-                if(confirm("CONFIRM BOOKING? Amount will be deducted from wallet.")) {
-                    const res = DB.bookClass(this.user.id, cid);
-                    if(res.ok) { this.toast("BOOKED! SEE YOU THERE."); this.navigate('classes'); } else { alert(res.msg); }
+                            <div style="display:grid; gap:10px;">
+                                <a href="${upiLink}" class="btn btn-gpay full-width" target="_blank"><span style="color:#4285F4">G</span>Pay</a>
+                                <a href="${upiLink}" class="btn btn-phonepe full-width" target="_blank">PhonePe</a>
+                                <a href="${upiLink}" class="btn btn-paytm full-width" target="_blank">Paytm</a>
+                            </div>
+
+                            <hr style="margin:20px 0; border-top:1px solid #eee;">
+                            
+                            <div id="payment-actions">
+                                <button class="btn btn-primary full-width" onclick="App.verifyPayment(${amt})">CONFIRM TRANSACTION</button>
+                                <button class="btn btn-ghost full-width" style="margin-top:10px; color:#555; border-color:#ccc;" onclick="App.closeModal()">CANCEL</button>
+                            </div>
+                        </div>
+                    `;
+                    document.getElementById('modal-content').style.background = "#fff";
+                    document.getElementById('modal-overlay').style.display = 'flex';
                 }
             },
 
-            // Admin Actions
-            modalAddUser() {
+            verifyPayment(amt) {
+                // Simulate verification delay (Since we lack a backend webhook)
+                const btn = document.querySelector('#payment-actions button');
+                btn.innerText = "VERIFYING BANK...";
+                btn.disabled = true;
+                btn.style.background = "#555";
+
+                setTimeout(() => {
+                    DB.topUp(App.user.id, amt);
+                    App.showInvoice(amt);
+                }, 2500);
+            },
+
+            showInvoice(amt) {
+                const invId = Utils.generateInvoiceId();
+                const today = Utils.getToday();
+                
+                // Construct Email Body for "Send to Mail"
+                const mailSubject = `SmashFit Invoice: ${invId}`;
+                const mailBody = `Hello ${App.user.name},\n\nThank you for your payment.\n\nINVOICE ID: ${invId}\nDATE: ${today}\nAMOUNT: KES ${amt}\nSTATUS: Paid via UPI\n\nKeep Smashing!\nSmashFit Team`;
+                const mailtoLink = `mailto:${App.user.id}?subject=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(mailBody)}`;
+
                 document.getElementById('modal-content').innerHTML = `
-                    <div style="padding:25px;">
-                        <h3 style="margin-bottom:20px;">REGISTER NEW USER</h3>
-                        <form onsubmit="App.performAddUser(event)">
-                            <div class="input-group">
-                                <label>System Role</label>
-                                <select id="n-role">
-                                    <option value="member">Member</option>
-                                    <option value="trainer">Trainer</option>
-                                    <option value="admin">Admin</option>
-                                </select>
-                            </div>
-                            <div class="input-group"><label>Email Address</label><input id="n-id" required></div>
-                            <div class="input-group"><label>Full Name</label><input id="n-name" required></div>
-                            <div class="input-group"><label>Default Password</label><input id="n-pass" required value="123"></div>
-                            <button class="btn btn-primary full-width">CREATE ACCOUNT</button>
-                        </form>
-                        <button class="btn btn-ghost full-width" onclick="App.closeModal()" style="margin-top:10px;">CANCEL</button>
-                    </div>`;
-                document.getElementById('modal-overlay').style.display = 'flex';
+                    <div class="invoice-box">
+                        <div style="text-align:center; margin-bottom:20px;">
+                            <h1 style="color:#FF3B30; font-family:'Teko'; font-size:3rem;">PAID</h1>
+                            <i class="material-icons-round" style="color:#32D74B; font-size:4rem;">check_circle</i>
+                        </div>
+                        <h2>INVOICE</h2>
+                        <div class="invoice-row"><span>Invoice ID:</span> <b>${invId}</b></div>
+                        <div class="invoice-row"><span>Date:</span> <span>${today}</span></div>
+                        <div class="invoice-row"><span>Billed To:</span> <span>${App.user.name}</span></div>
+                        <hr style="border:1px dashed #ccc; margin:10px 0;">
+                        <div class="invoice-row"><span>Wallet Top-up</span> <span>KES ${amt}</span></div>
+                        <div class="invoice-row invoice-total"><span>TOTAL</span> <span>KES ${amt}</span></div>
+                        
+                        <div style="margin-top:20px; display:grid; gap:10px;">
+                            <a href="${mailtoLink}" class="btn btn-primary full-width">SEND INVOICE TO EMAIL</a>
+                            <button onclick="window.print()" class="btn btn-ghost full-width" style="color:#000; border-color:#000;">PRINT RECEIPT</button>
+                            <button onclick="App.closeModal(); App.navigate('dashboard');" class="btn btn-ghost full-width" style="color:#555; border:none;">CLOSE</button>
+                        </div>
+                    </div>
+                `;
             },
 
-            modalAddClass() {
-                document.getElementById('modal-content').innerHTML = `
-                    <div style="padding:25px;">
-                        <h3 style="margin-bottom:20px;">SCHEDULE NEW CLASS</h3>
-                        <form onsubmit="App.performAddClass(event)">
-                            <div class="input-group"><label>Class Name</label><input id="c-name" required placeholder="e.g., Core Blast"></div>
-                            <div class="input-group"><label>Start Time (24h)</label><input type="time" id="c-time" required></div>
-                            <div class="input-group">
-                                <label>Coach</label>
-                                <select id="c-trainer">
-                                    ${GymData.trainers.map(t => `<option value="${t}">${t}</option>`).join('')}
-                                </select>
-                            </div>
-                            <div class="input-group"><label>Price (KES)</label><input type="number" id="c-price" required value="1500"></div>
-                            <button class="btn btn-primary full-width">PUBLISH TO SCHEDULE</button>
-                        </form>
-                        <button class="btn btn-ghost full-width" onclick="App.closeModal()" style="margin-top:10px;">CANCEL</button>
-                    </div>`;
-                document.getElementById('modal-overlay').style.display = 'flex';
+            memberSubscribe(type) { 
+                const select = document.getElementById(`sel-${type}`);
+                if(!select) return;
+                const val = select.value.split('|');
+                if(confirm(`Confirm ${type} subscription?\nCost: ${Utils.formatMoney(parseInt(val[0]))}`)) {
+                    const res = DB.subscribePlan(this.user.id, type, parseInt(val[0]), val[1], val[2]);
+                    if(res.ok) { this.toast(res.msg); this.user = DB.get('gym_users_db').find(u => u.id === this.user.id); this.navigate('dashboard'); }
+                    else { alert(res.msg); }
+                }
             },
-
-            modalEditClass(cid) {
-                const c = DB.getClass(cid);
-                document.getElementById('modal-content').innerHTML = `
-                    <div style="padding:25px;">
-                        <h3 style="margin-bottom:20px;">EDIT CLASS DETAILS</h3>
-                        <form onsubmit="App.performEditClass(event, '${cid}')">
-                            <div class="input-group"><label>Class Name</label><input id="e-name" value="${c.name}" required></div>
-                            <div class="input-group"><label>Start Time</label><input type="time" id="e-time" value="${c.time}" required></div>
-                            <div class="input-group">
-                                <label>Coach</label>
-                                <select id="e-trainer">
-                                    ${GymData.trainers.map(t => `<option value="${t}" ${t===c.trainer?'selected':''}>${t}</option>`).join('')}
-                                </select>
-                            </div>
-                            <div class="input-group"><label>Price (KES)</label><input type="number" id="e-price" value="${c.price}" required></div>
-                            <button class="btn btn-primary full-width">SAVE CHANGES</button>
-                        </form>
-                        <button class="btn btn-ghost full-width" onclick="App.closeModal()" style="margin-top:10px;">CANCEL</button>
-                    </div>`;
-                document.getElementById('modal-overlay').style.display = 'flex';
+            toggleAttendance() { 
+                const res = DB.toggleAttendance(this.user.id, this.user.name, this.user.role);
+                // FORCE REFRESH USER STATE
+                this.user = DB.get('gym_users_db').find(u => u.id === this.user.id);
+                this.toast(res.msg); 
+                this.navigate('dashboard'); 
             },
-
-            performAddUser(e) {
-                e.preventDefault();
-                const u = { id: document.getElementById('n-id').value, name: document.getElementById('n-name').value, pass: document.getElementById('n-pass').value, role: document.getElementById('n-role').value, wallet: 0, txns: [] };
-                if(DB.addUser(u)) { App.closeModal(); App.toast("USER ADDED SUCCESSFULLY"); App.navigate('users'); } else { alert("EMAIL ALREADY EXISTS"); }
-            },
-            performAddClass(e) {
-                e.preventDefault();
-                DB.addClass({ id: 'c'+Date.now(), name: document.getElementById('c-name').value, time: document.getElementById('c-time').value, trainer: document.getElementById('c-trainer').value, price: parseInt(document.getElementById('c-price').value), cap: 20, booked: [] });
-                App.closeModal(); App.toast("CLASS PUBLISHED"); App.navigate('classes');
-            },
-            performEditClass(e, cid) {
-                e.preventDefault();
-                DB.editClass(cid, { name: document.getElementById('e-name').value, time: document.getElementById('e-time').value, trainer: document.getElementById('e-trainer').value, price: parseInt(document.getElementById('e-price').value) });
-                App.closeModal(); App.toast("CLASS UPDATED"); App.navigate('classes');
-            },
-
-            actionDeleteUser(uid) { if(confirm("PERMANENTLY DELETE USER?")) { DB.deleteUser(uid); App.toast("USER DELETED"); App.navigate('users'); } },
-            actionDeleteClass(cid) { if(confirm("CANCEL THIS CLASS?")) { DB.deleteClass(cid); App.toast("CLASS CANCELLED"); App.navigate('classes'); } },
-            actionTopUp(uid) { const amt = prompt("ENTER AMOUNT TO TOP UP (KES):"); if(amt && !isNaN(amt)) { DB.topUp(uid, amt); App.toast("WALLET CREDITED"); App.navigate('users'); } },
             
-            closeModal() { document.getElementById('modal-overlay').style.display = 'none'; },
-            toast(msg) {
-                const t = document.getElementById('toast');
-                t.innerText = msg; t.style.transform = 'translateY(0)';
-                setTimeout(() => t.style.transform = 'translateY(150px)', 3500);
-            }
+            actionBook(cid) { const res = DB.bookClass(this.user.id, cid); if(res.ok) { this.toast("BOOKED"); this.navigate('classes'); } else { alert(res.msg); } },
+            setRating(n) { App.currentRating = n; document.querySelectorAll('#star-input i').forEach((s, i) => i < n ? s.classList.add('active') : s.classList.remove('active')); },
+            sendFeedback() { const msg = document.getElementById('fb-msg').value; if(!msg) return alert("Please enter a comment"); DB.submitFeedback(this.user.id, this.user.name, App.currentRating, msg); this.toast("FEEDBACK SENT"); this.navigate('dashboard'); },
+            modalAddUser() { document.getElementById('modal-content').innerHTML = `<div style="padding:25px;"><h3>ADD USER</h3><form onsubmit="App.performAddUser(event)"><div class="input-group"><label>Role</label><select id="n-role"><option value="member">Member</option><option value="trainer">Trainer</option><option value="admin">Admin</option></select></div><div class="input-group"><label>Email</label><input id="n-id" required></div><div class="input-group"><label>Name</label><input id="n-name" required></div><button class="btn btn-primary full-width">CREATE</button></form><button class="btn btn-ghost full-width" style="margin-top:10px;" onclick="App.closeModal()">CANCEL</button></div>`; document.getElementById('modal-overlay').style.display = 'flex'; },
+            performAddUser(e) { e.preventDefault(); DB.addUser({ id: document.getElementById('n-id').value, name: document.getElementById('n-name').value, pass: '123', role: document.getElementById('n-role').value, wallet:0, activePlan: null, isCheckedIn: false }); this.closeModal(); this.toast("USER ADDED"); this.navigate('users'); },
+            actionDeleteUser(uid) { if(confirm("Delete user?")) { DB.deleteUser(uid); this.navigate('users'); } },
+            actionTopUp(uid) { const amt=prompt("Amt:"); if(amt) { DB.topUp(uid, amt); this.navigate('users'); } },
+            closeModal() { document.getElementById('modal-overlay').style.display = 'none'; document.getElementById('modal-content').style.background = "#111"; },
+            toast(msg) { const t = document.getElementById('toast'); t.innerText = msg; t.style.transform = 'translateY(0)'; setTimeout(() => t.style.transform = 'translateY(150px)', 3000); }
         };
-
         App.init();
     </script>
 </body>
