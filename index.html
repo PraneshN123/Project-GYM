@@ -14,25 +14,19 @@
         :root {
             --brand-primary: #FF3B30; 
             --brand-dark: #8E0000;
-            --brand-success: #39FF14; /* NEON GREEN for Check In */
+            --brand-success: #39FF14; /* NEON GREEN */
             --brand-gold: #FFD700;
             
-            /* RED HEATMAP PALETTE (Light = Low, Dark = High) */
-            --hm-0: #1a0505; /* Empty - Very dark red/black */
-            --hm-1: #FFB3B3; /* Light Red */
-            --hm-2: #FF6666; /* Medium Red */
-            --hm-3: #FF0000; /* Standard Red */
-            --hm-4: #8B0000; /* Dark Deep Red (Highest Activity) */
-
-            /* UPI BRANDING */
-            --brand-upi: #1a73e8;
-            --brand-gpay: #fff;
-            --brand-phonepe: #6739b7;
-            --brand-paytm: #00b9f1;
+            /* RED HEATMAP PALETTE */
+            --hm-0: #1a0505; 
+            --hm-1: #ff9999; 
+            --hm-2: #ff4d4d; 
+            --hm-3: #cc0000; 
+            --hm-4: #660000; 
 
             --bg-body: #050505;
             --bg-panel: #0F0F0F;
-            --bg-card: #141414; /* Solid color, no transparency/blur */
+            --bg-card: #141414; /* Solid color, NO BLUR */
             --bg-input: #000000;
             --font-head: 'Teko', sans-serif;
             --font-body: 'Roboto Condensed', sans-serif;
@@ -49,9 +43,11 @@
             height: 100vh;
             overflow: hidden;
             display: flex;
-            background-image: linear-gradient(rgba(0,0,0,0.95), rgba(0,0,0,0.98)), url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070&auto=format&fit=crop');
+            /* MAIN APP BACKGROUND: Gym Interior */
+            background-image: linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.95)), url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=2070&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
+            background-attachment: fixed;
         }
 
         h1, h2, h3, h4 { font-family: var(--font-head); text-transform: uppercase; letter-spacing: 1px; font-weight: 600; margin: 0; line-height: 1.1; }
@@ -82,29 +78,45 @@
             transform: translateY(-2px);
         }
 
-        /* CHECK IN BUTTON - NEON GREEN */
+        /* --- MATTE FINISH BUTTONS --- */
+        
+        /* Check In: Neon Green to Black Matte */
         .btn-checkin {
-            background: var(--brand-success);
+            background: linear-gradient(180deg, #39FF14 0%, #0d2e06 100%);
             color: #000;
+            border: 1px solid #1f6b12;
             text-shadow: none;
-            font-weight: 700;
-            box-shadow: 0 0 15px rgba(57, 255, 20, 0.4);
+            box-shadow: 0 4px 10px rgba(57, 255, 20, 0.2);
         }
         .btn-checkin:hover {
-            background: #fff;
-            box-shadow: 0 0 25px rgba(57, 255, 20, 0.8);
+            background: linear-gradient(180deg, #5cff3d 0%, #14400a 100%);
+            box-shadow: 0 0 15px rgba(57, 255, 20, 0.6);
+            color: #000;
         }
+
+        /* Check Out: Brand Red to Black Matte */
         .btn-checkout {
-            background: #333;
+            background: linear-gradient(180deg, #FF3B30 0%, #450b08 100%);
             color: #fff;
-            border: 1px solid #555;
+            border: 1px solid #8f120b;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+            box-shadow: 0 4px 10px rgba(255, 59, 48, 0.2);
+        }
+        .btn-checkout:hover {
+            background: linear-gradient(180deg, #ff6359 0%, #5e0f0b 100%);
+            box-shadow: 0 0 15px rgba(255, 59, 48, 0.6);
         }
 
         /* Payment Buttons */
         .btn-gpay { background: #fff; color: #333; border: 1px solid #ddd; }
         .btn-phonepe { background: #6739b7; color: #fff; }
         .btn-paytm { background: #00b9f1; color: #fff; }
-        .btn-upi-generic { background: linear-gradient(135deg, #2193b0, #6dd5ed); color: #fff; }
+        
+        .mobile-payment-options { display: none; }
+        @media (max-width: 768px) {
+            .mobile-payment-options { display: grid; gap: 10px; margin-top: 15px; }
+            .qr-container { display: none; } 
+        }
 
         .btn-ghost { background: transparent; border: 1px solid #555; color: #fff; }
         .btn-ghost:hover { border-color: var(--brand-primary); color: var(--brand-primary); background: rgba(255,59,48,0.1); }
@@ -121,7 +133,6 @@
         .card {
             background: var(--bg-card); border: var(--border); padding: 24px;
             margin-bottom: 20px; position: relative; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            /* NO BLUR as requested */
             box-shadow: 0 4px 10px rgba(0,0,0,0.5); 
         }
         .card:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(0,0,0,0.5); border-color: #555; }
@@ -137,7 +148,6 @@
             background: #080808; border: 1px solid #222; border-radius: 16px; padding: 25px; 
             position: relative; overflow: hidden; box-shadow: inset 0 0 50px rgba(0,0,0,0.8);
         }
-        /* Top Glow Bar */
         .heatmap-ui::before {
             content:''; position: absolute; top:0; left:50%; transform: translateX(-50%); width:80%; height:2px;
             background: linear-gradient(90deg, transparent, var(--hm-3), transparent);
@@ -150,7 +160,6 @@
         
         .hm-controls { display: flex; gap: 15px; align-items: center; }
         
-        /* Circular Stat Ring */
         .hm-stat-ring {
             width: 50px; height: 50px; border-radius: 50%;
             background: conic-gradient(var(--hm-3) var(--p, 0%), #222 0%);
@@ -165,14 +174,12 @@
         .hm-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; }
         .hm-day-head { text-align: center; color: #444; font-size: 0.9rem; font-weight: bold; margin-bottom: 5px; font-family: var(--font-head); letter-spacing: 1px; }
         
-        /* The Isotope Cell */
         .iso-cell {
             aspect-ratio: 1; background: #111; border-radius: 8px; position: relative; cursor: pointer;
             border: 1px solid #222; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex; align-items: center; justify-content: center;
         }
         
-        /* The Core (Inner Light) */
         .iso-core {
             width: 60%; height: 60%; border-radius: 4px; background: var(--hm-0); transition: 0.3s;
             display: flex; align-items: center; justify-content: center; font-family: var(--font-head); font-size: 1rem;
@@ -182,20 +189,19 @@
         .iso-cell:hover { transform: scale(1.2) translateY(-5px); z-index: 10; border-color: #fff; box-shadow: 0 15px 30px rgba(0,0,0,0.9); }
         .iso-cell:hover .iso-core { color: #fff; transform: scale(1.1); }
         
-        /* Intensity Levels (RED SCALE) */
         .iso-0 .iso-core { background: var(--hm-0); }
-        .iso-1 .iso-core { background: var(--hm-1); color: #000; box-shadow: 0 0 5px var(--hm-1); } /* Light Red */
-        .iso-2 .iso-core { background: var(--hm-2); color: #000; box-shadow: 0 0 8px var(--hm-2); }
+        .iso-1 .iso-core { background: var(--hm-1); color: #000; box-shadow: 0 0 5px var(--hm-1); } 
+        .iso-2 .iso-core { background: var(--hm-2); color: #fff; box-shadow: 0 0 8px var(--hm-2); }
         .iso-3 .iso-core { background: var(--hm-3); color: #fff; box-shadow: 0 0 12px var(--hm-3); }
         .iso-4 .iso-core { 
-            background: var(--hm-4); box-shadow: 0 0 20px var(--hm-4); /* Dark Red */
+            background: var(--hm-4); box-shadow: 0 0 20px var(--hm-4); 
             color: #fff; font-weight: bold; animation: pulse-core 2s infinite;
         }
         .iso-4 { border-color: var(--hm-3); }
 
         @keyframes pulse-core {
             0% { box-shadow: 0 0 10px var(--hm-3); }
-            50% { box-shadow: 0 0 25px var(--hm-3); }
+            50% { box-shadow: 0 0 25px var(--hm-4); }
             100% { box-shadow: 0 0 10px var(--hm-3); }
         }
 
@@ -237,12 +243,17 @@
         .info-table th { color: var(--brand-primary); font-family: var(--font-head); font-size: 1.1rem; letter-spacing: 0.5px; }
 
         /* AUTH & MODAL */
-        #auth-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 5000; background: #000; display: flex; align-items: center; justify-content: center; background-image: url('https://images.unsplash.com/photo-1599058945522-28d584b6f0ff?q=80&w=2069&auto=format&fit=crop'); background-size: cover; background-position: center; }
-        /* REMOVED BLUR */
-        .auth-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.92); }
+        /* LOGIN BACKGROUND - Dark Gym Mood */
+        #auth-screen { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 5000; background: #000; 
+            display: flex; align-items: center; justify-content: center; 
+            background-image: url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070&auto=format&fit=crop'); 
+            background-size: cover; background-position: center; 
+        }
+        .auth-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(2px); }
         .auth-box { width: 100%; max-width: 400px; padding: 40px; background: #111; border: 1px solid #333; position: relative; z-index: 2; box-shadow: 0 20px 50px #000; }
         .auth-logo { max-width: 160px; height: auto; display: block; margin: 0 auto 15px auto; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.6)); }
-        /* REMOVED BLUR */
+        
         #modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 2000; display: none; align-items: center; justify-content: center; }
         #modal-content { width: 90%; max-width: 500px; background: #111; border: 1px solid #333; max-height: 90vh; overflow-y: auto; }
         #toast { position: fixed; bottom: 30px; right: 30px; background: #fff; color: #000; padding: 15px 30px; font-weight: bold; z-index: 9999; transform: translateY(150px); transition: 0.3s; border-left: 6px solid var(--brand-primary); font-family: var(--font-head); font-size: 1.4rem; box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
@@ -334,7 +345,7 @@
             trainers: ["Boniface Ninno", "Steve Boycardio", "Ebel Odel", "Frank Murule", "Sabina Shamilar", "Billy Wanga"],
             shiftTypes: ["Morning (05:00 - 13:00)", "Afternoon (12:00 - 20:00)", "Evening (14:00 - 22:00)"],
             upiId: "praneshkriss@oksbi", // UPDATED UPI ID
-            qrImage: "image_a2295a.png" // User uploaded QR
+            qrImage: "https://i.postimg.cc/W3RL7j9J/e142fa3f-c39b-42b7-ad07-65a7c403eb48.png" // UPDATED QR IMAGE
         };
 
         const Utils = {
@@ -703,7 +714,7 @@
                         container.innerHTML = `<div class="list-header"><h2>PAYROLL</h2><button class="btn btn-ghost" onclick="alert('Zoho Books CSV Exported!')">SYNC ZOHO</button></div><div class="card"><table class="info-table"><thead><tr><th>Employee</th><th>Base</th><th>Bonus</th><th>Net</th></tr></thead><tbody>${users.filter(u => u.role === 'trainer').map(u => {const daysPresent = attendance.filter(a => a.uid === u.id).length; const bonus = daysPresent * 1000; return `<tr><td>${u.name}</td><td>${Utils.formatMoney(u.basicPay||0)}</td><td>${Utils.formatMoney(bonus)}</td><td class="text-success font-num">${Utils.formatMoney((u.basicPay||0)+bonus)}</td></tr>`;}).join('')}</tbody></table></div>`;
                     }
                     else if(viewId === 'feedback') {
-                         // ADMIN VIEW: List Feedback
+                         // ADMIN VIEW: List Feedback Only (No Input)
                          const feedbacks = DB.get('gym_feedback');
                          container.innerHTML = `<div class="list-header"><h2>MEMBER FEEDBACK</h2></div><div class="grid-3">${feedbacks.length ? feedbacks.map(f => `<div class="card"><div style="display:flex; justify-content:space-between;"><h4>${f.name}</h4><span class="text-brand">${f.rating}/5</span></div><p class="text-muted" style="margin-top:10px;">"${f.comment}"</p><p style="font-size:0.8rem; color:#555;">${f.date}</p></div>`).join('') : '<p>No feedback received yet.</p>'}</div>`;
                     }
@@ -712,7 +723,7 @@
                     this.user = users.find(u => u.id === this.user.id);
                     if(viewId === 'dashboard') {
                         const hasPlan = this.user.activePlan && new Date(this.user.activePlan.expiry) >= new Date();
-                        // UPDATED: Check In Button is now Neon Green (btn-checkin)
+                        // UPDATED: Check In (Green Matte) / Check Out (Red Matte)
                         container.innerHTML = `<div class="grid-2"><div class="card" style="border-left: 5px solid var(--brand-primary); background: linear-gradient(135deg, #101010 0%, #1f0505 100%);"><h3 class="text-muted">WALLET</h3><h1 class="text-white font-num" style="font-size: 3.5rem; line-height:1; margin: 10px 0;">${Utils.formatMoney(this.user.wallet)}</h1><button onclick="App.memberTopUp()" class="btn btn-primary">+ ADD FUNDS</button></div><div class="card" style="display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;"><h3 class="text-muted">ACCESS CONTROL</h3><button class="btn ${this.user.isCheckedIn ? 'btn-checkout' : 'btn-checkin'}" style="margin-top:15px; width:200px; height:80px; font-size:1.5rem; border-radius:10px;" onclick="App.toggleAttendance()"><i class="material-icons-round" style="margin-right:10px;">${this.user.isCheckedIn ? 'logout' : 'login'}</i>${this.user.isCheckedIn ? 'CHECK OUT' : 'CHECK IN'}</button><p class="text-muted" style="margin-top:10px;">${this.user.isCheckedIn ? 'You are currently inside.' : 'Scan to enter.'}</p></div></div><div style="margin-top: 40px;">${hasPlan ? `<div class="card" style="border: 1px solid var(--brand-success);"><h2 class="text-success">ACTIVE MEMBERSHIP: ${this.user.activePlan.name}</h2><p class="text-white" style="font-size:1.2rem; margin-top:10px;">Expires: ${this.user.activePlan.expiry}</p></div>` : `<h2 class="text-white" style="margin-bottom: 20px; font-size:2rem;">CHOOSE MEMBERSHIP</h2><div class="grid-3">${GymData.membership.map(m => `<div class="card ${m.css} card-plan"><h2>${m.type}</h2><select id="sel-${m.type}" style="margin:20px 0;">${m.plans.map(p => `<option value="${p.price}|${p.dur}|${p.days}">${p.dur} - ${Utils.formatMoney(p.price)}</option>`).join('')}</select><button class="btn btn-primary full-width" onclick="App.memberSubscribe('${m.type}')">SUBSCRIBE</button></div>`).join('')}</div>`}</div>`;
                     }
                     else if(viewId === 'classes') {
@@ -722,7 +733,7 @@
                         container.innerHTML = `<div class="list-header"><h2>TRANSACTIONS</h2></div><div class="card">${(this.user.txns&&this.user.txns.length>0)?this.user.txns.map(t=>`<div style="display:flex; justify-content:space-between; border-bottom:1px solid #222; padding:15px 0;"><div><div style="font-weight:bold;">${t.desc}</div><div class="text-muted text-small">${t.date}</div></div><div class="font-num ${parseInt(t.amt)<0?'text-brand':'text-success'}">${parseInt(t.amt)>0?'+':''} ${t.amt}</div></div>`).join(''):'<p>No transactions yet.</p>'}</div>`;
                     }
                     else if(viewId === 'feedback') {
-                         // MEMBER VIEW: Give Feedback
+                         // MEMBER VIEW: Give Feedback Form
                          container.innerHTML = `<div class="list-header"><h2>GIVE FEEDBACK</h2></div><div class="card" style="max-width:500px;"><div class="input-group"><label>Rate Experience</label><div class="star-rating" id="star-input"><i class="material-icons-round active" onclick="App.setRating(1)">star</i><i class="material-icons-round active" onclick="App.setRating(2)">star</i><i class="material-icons-round active" onclick="App.setRating(3)">star</i><i class="material-icons-round active" onclick="App.setRating(4)">star</i><i class="material-icons-round active" onclick="App.setRating(5)">star</i></div></div><div class="input-group"><label>Comment</label><textarea id="fb-msg" rows="3"></textarea></div><button class="btn btn-primary full-width" onclick="App.sendFeedback()">SUBMIT</button></div>`;
                     }
                 }
@@ -749,7 +760,6 @@
                 const amt = prompt("Enter Amount (KES):"); 
                 if(amt && !isNaN(amt)) { 
                     // DEEP LINK CONSTRUCTION
-                    // pn = Payee Name, pa = UPI ID, am = Amount, cu = Currency
                     const upiLink = `upi://pay?pa=${GymData.upiId}&pn=SmashFit&am=${amt}&cu=INR`;
                     
                     document.getElementById('modal-content').innerHTML = `
@@ -757,13 +767,13 @@
                             <h3 style="color:#000; margin-bottom:5px;">PAYMENT GATEWAY</h3>
                             <p style="color:#666;">Amount to Pay: <b style="color:#000;">KES ${amt}</b></p>
                             
-                            <div style="background:#fff; padding:10px; display:inline-block; border:1px solid #ccc; border-radius:8px; margin:15px 0;">
+                            <div class="qr-container" style="background:#fff; padding:10px; display:inline-block; border:1px solid #ccc; border-radius:8px; margin:15px 0;">
                                 <img src="${GymData.qrImage}" style="max-width:180px; height:auto;" alt="UPI QR">
+                                <p style="color:#333; font-size:0.8rem; margin-top:5px;">Scan with any UPI App</p>
                             </div>
                             
-                            <p style="color:#333; font-size:0.9rem; margin-bottom:10px;">Scan QR or Select App</p>
-
-                            <div style="display:grid; gap:10px;">
+                            <div class="mobile-payment-options">
+                                <p style="color:#333; font-size:0.9rem; margin-bottom:5px;">Tap to Pay:</p>
                                 <a href="${upiLink}" class="btn btn-gpay full-width" target="_blank"><span style="color:#4285F4">G</span>Pay</a>
                                 <a href="${upiLink}" class="btn btn-phonepe full-width" target="_blank">PhonePe</a>
                                 <a href="${upiLink}" class="btn btn-paytm full-width" target="_blank">Paytm</a>
@@ -772,7 +782,7 @@
                             <hr style="margin:20px 0; border-top:1px solid #eee;">
                             
                             <div id="payment-actions">
-                                <button class="btn btn-primary full-width" onclick="App.verifyPayment(${amt})">CONFIRM TRANSACTION</button>
+                                <button class="btn btn-primary full-width" onclick="App.verifyPayment(${amt})">CONFIRM I HAVE PAID</button>
                                 <button class="btn btn-ghost full-width" style="margin-top:10px; color:#555; border-color:#ccc;" onclick="App.closeModal()">CANCEL</button>
                             </div>
                         </div>
@@ -792,7 +802,7 @@
                 setTimeout(() => {
                     DB.topUp(App.user.id, amt);
                     App.showInvoice(amt);
-                }, 2500);
+                }, 2000);
             },
 
             showInvoice(amt) {
@@ -852,6 +862,99 @@
             performAddUser(e) { e.preventDefault(); DB.addUser({ id: document.getElementById('n-id').value, name: document.getElementById('n-name').value, pass: '123', role: document.getElementById('n-role').value, wallet:0, activePlan: null, isCheckedIn: false }); this.closeModal(); this.toast("USER ADDED"); this.navigate('users'); },
             actionDeleteUser(uid) { if(confirm("Delete user?")) { DB.deleteUser(uid); this.navigate('users'); } },
             actionTopUp(uid) { const amt=prompt("Amt:"); if(amt) { DB.topUp(uid, amt); this.navigate('users'); } },
+            
+            // --- FIX FOR ADDING CLASSES ---
+            modalAddClass() {
+                const trainers = DB.get('gym_users_db').filter(u => u.role === 'trainer');
+                document.getElementById('modal-content').innerHTML = `
+                    <div style="padding:25px;">
+                        <h3>ADD NEW CLASS</h3>
+                        <form onsubmit="App.performAddClass(event)">
+                            <div class="input-group"><label>Class Name</label><input id="c-name" required placeholder="e.g. Zumba"></div>
+                            <div class="input-group"><label>Time</label><input type="time" id="c-time" required></div>
+                            <div class="input-group">
+                                <label>Trainer</label>
+                                <select id="c-trainer">
+                                    ${trainers.map(t => `<option value="${t.name}">${t.name}</option>`).join('')}
+                                </select>
+                            </div>
+                            <div class="input-group"><label>Price (KES)</label><input type="number" id="c-price" required></div>
+                            <div class="input-group"><label>Capacity</label><input type="number" id="c-cap" required value="20"></div>
+                            <button class="btn btn-primary full-width">SCHEDULE CLASS</button>
+                        </form>
+                        <button class="btn btn-ghost full-width" style="margin-top:10px;" onclick="App.closeModal()">CANCEL</button>
+                    </div>
+                `;
+                document.getElementById('modal-overlay').style.display = 'flex';
+            },
+            performAddClass(e) {
+                e.preventDefault();
+                const newClass = {
+                    id: 'c' + Date.now(),
+                    name: document.getElementById('c-name').value,
+                    time: document.getElementById('c-time').value,
+                    trainer: document.getElementById('c-trainer').value,
+                    price: parseInt(document.getElementById('c-price').value),
+                    cap: parseInt(document.getElementById('c-cap').value),
+                    booked: []
+                };
+                DB.addClass(newClass);
+                App.closeModal();
+                App.toast("CLASS SCHEDULED");
+                App.navigate('classes');
+            },
+            actionDeleteClass(cid) { if(confirm("Cancel class?")) { DB.deleteClass(cid); App.navigate('classes'); } },
+
+            // --- FIX FOR ASSIGNING SHIFTS ---
+            modalAddShift() {
+                const trainers = DB.get('gym_users_db').filter(u => u.role === 'trainer');
+                const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+                document.getElementById('modal-content').innerHTML = `
+                    <div style="padding:25px;">
+                        <h3>ASSIGN SHIFT</h3>
+                        <form onsubmit="App.performAddShift(event)">
+                            <div class="input-group">
+                                <label>Trainer</label>
+                                <select id="s-trainer">
+                                    ${trainers.map(t => `<option value="${t.id}|${t.name}">${t.name}</option>`).join('')}
+                                </select>
+                            </div>
+                            <div class="input-group">
+                                <label>Day</label>
+                                <select id="s-day">
+                                    ${days.map(d => `<option value="${d}">${d}</option>`).join('')}
+                                </select>
+                            </div>
+                            <div class="input-group">
+                                <label>Shift</label>
+                                <select id="s-type">
+                                    ${GymData.shiftTypes.map(s => `<option value="${s}">${s}</option>`).join('')}
+                                </select>
+                            </div>
+                            <button class="btn btn-primary full-width">ASSIGN</button>
+                        </form>
+                        <button class="btn btn-ghost full-width" style="margin-top:10px;" onclick="App.closeModal()">CANCEL</button>
+                    </div>
+                `;
+                document.getElementById('modal-overlay').style.display = 'flex';
+            },
+            performAddShift(e) {
+                e.preventDefault();
+                const trainerVal = document.getElementById('s-trainer').value.split('|');
+                const newShift = {
+                    id: 's' + Date.now(),
+                    staffId: trainerVal[0],
+                    name: trainerVal[1],
+                    day: document.getElementById('s-day').value,
+                    shift: document.getElementById('s-type').value
+                };
+                DB.assignShift(newShift);
+                App.closeModal();
+                App.toast("SHIFT ASSIGNED");
+                App.navigate('shifts');
+            },
+            actionDeleteShift(sid) { if(confirm("Remove shift?")) { DB.deleteShift(sid); App.navigate('shifts'); } },
+
             closeModal() { document.getElementById('modal-overlay').style.display = 'none'; document.getElementById('modal-content').style.background = "#111"; },
             toast(msg) { const t = document.getElementById('toast'); t.innerText = msg; t.style.transform = 'translateY(0)'; setTimeout(() => t.style.transform = 'translateY(150px)', 3000); }
         };
